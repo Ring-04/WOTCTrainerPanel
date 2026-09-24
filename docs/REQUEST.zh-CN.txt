@@ -1,0 +1,564 @@
+项目：
+XCOM 2: War of the Chosen 中文 Trainer Mod
+
+目标：
+制作一个运行于游戏内部的单机修改器/调试面板。
+
+核心原则：
+1. 只支持 Steam Windows 版 XCOM 2: War of the Chosen。
+2. 游戏可以始终保持简体中文。
+3. 不依赖 -allowconsole。
+4. 不修改 XCom2.exe。
+5. 不使用 DLL 注入、固定内存地址、AOB 扫描、Cheat Engine。
+6. 优先使用 WOTC SDK 的 UnrealScript、X2 GameState、TemplateManager、
+   Strategy/Tactical UI API。
+7. 不猜 API。每一个调用在编码前都必须先从 SDK/Game Source 中确认。
+8. 所有修改必须经过合法 GameState submission，尽可能保证存档可正常保存读取。
+9. 建立 Git 仓库，每完成一个独立模块 commit 一次。
+
+项目名称：
+WOTC Trainer Panel
+
+==================================================
+一、UI
+==================================================
+
+战略层和战术层各增加一个：
+
+修改器
+
+按钮。
+
+界面必须支持简体中文。
+
+使用标签页：
+
+[资源]
+[人员]
+[士兵]
+[战略]
+[装备]
+[战术]
+[任务]
+[危险功能]
+
+所有修改显示：
+
+原值 → 新值
+
+所有危险操作二次确认。
+
+所有 Toggle 必须明确显示：
+
+开启 / 关闭
+
+==================================================
+二、资源修改
+==================================================
+
+支持自定义数值输入以及快捷按钮。
+
+Supplies
+Intel
+Alien Alloys
+Elerium Crystals
+Elerium Cores
+XCOM Ability Points
+
+快捷：
+
++10
++50
++100
++500
++1000
+
+不得让资源值低于 0。
+
+==================================================
+三、人员添加
+==================================================
+
+支持：
+
++1 Engineer
++1 Scientist
+
+新增：
+
+Add Rookie
+
+允许输入数量：
+1-20
+
+允许选择：
+
+Random Rookie
+Ranger
+Grenadier
+Specialist
+Sharpshooter
+
+WOTC faction soldiers：
+
+Reaper
+Skirmisher
+Templar
+
+Faction Soldier 生成必须优先使用游戏实际的
+CharacterTemplate / SoldierClassTemplate /
+Headquarters roster API。
+
+不要复制已有 Unit Object。
+
+必须创建合法、唯一的 XComGameState_Unit。
+
+生成后必须：
+
+- 出现在 Barracks
+- 可正常升级
+- 可装备
+- 可参加任务
+- 可保存/读取
+- 有合法名字、国籍、外观数据
+
+允许选择初始军衔：
+
+Rookie
+Squaddie
+Corporal
+Sergeant
+Lieutenant
+Captain
+Major
+Colonel
+
+如果直接创建高军衔可能导致能力树异常，
+必须改为创建士兵后通过游戏自身晋升逻辑逐级晋升。
+
+==================================================
+四、士兵编辑器
+==================================================
+
+显示 Barracks 当前全部士兵。
+
+选择一个士兵后：
+
+姓名
+昵称
+国籍
+
+职业
+军衔
+XP
+个人 Ability Points
+
+状态：
+
+Heal
+Heal to Full
+Remove Wound
+Remove Fatigue
+Restore Will
+Remove Negative Traits
+
+属性：
+
+HP
+Aim
+Mobility
+Will
+Hack
+Dodge
+Defense
+
+提供：
+
++1
++5
++10
+-1
+-5
+-10
+
+以及：
+
+Restore Default
+
+默认属性必须读取对应 Template，
+不要硬编码。
+
+提供：
+
+Promote
+Demote
+
+Demote 如果无法安全实现，
+则禁用并解释原因。
+
+==================================================
+五、战略层修改
+==================================================
+
+Instant Research ON/OFF
+
+Instant Facility Construction ON/OFF
+
+Free Facility Construction ON/OFF
+
+Instant Proving Ground Project ON/OFF
+
+Instant Covert Action ON/OFF
+
+增加 Avenger Power
+
+增加 Resistance Contacts Capacity
+
+Avatar Project：
+
+-1
+-2
+-5
+Clear Avatar Progress
+
+Avatar 修改必须先研究真正的 Strategy GameState 实现，
+不得直接写 UI 数字。
+
+允许：
+
+Heal All Soldiers
+Restore All Will
+Remove All Fatigue
+
+==================================================
+六、装备 / 物品
+==================================================
+
+动态读取游戏中的 Item Templates。
+
+提供搜索框。
+
+分类：
+
+Weapons
+Armor
+Ammo
+Grenades
+Utility
+PCS
+Weapon Upgrades
+Heavy Weapons
+SPARK Equipment
+
+支持：
+
+Add 1
+Add 5
+Add 10
+
+不要手工维护完整物品 ID 列表。
+
+通过 X2ItemTemplateManager 获取可用模板。
+
+剧情关键物品默认隐藏。
+
+提供：
+
+显示剧情物品
+
+开关。
+
+开启时显示醒目警告。
+
+==================================================
+七、战术作弊
+==================================================
+
+全队无敌 ON/OFF
+
+选中士兵无敌 ON/OFF
+
+Unlimited Actions ON/OFF
+
+Unlimited Movement ON/OFF
+
+Shooting Does Not End Turn ON/OFF
+
+Unlimited Ammo ON/OFF
+
+No Reload ON/OFF
+
+No Ability Cooldown ON/OFF
+
+Unlimited Item Charges ON/OFF
+
+100% Hit Chance ON/OFF
+
+100% Critical Chance ON/OFF
+
+One Hit Kill ON/OFF
+
+Reveal Map
+
+Toggle Fog of War
+
+Skip AI Turn
+
+Freeze Enemy AI ON/OFF
+
+所有功能默认 OFF。
+
+无限行动必须避免 AI 单位继承效果。
+
+One Hit Kill 只能影响 XCOM 对敌人造成的伤害，
+不能影响环境伤害或敌人攻击 XCOM。
+
+==================================================
+八、战术单位功能
+==================================================
+
+选中一个单位：
+
+Heal
+Full Heal
+Add Action Point
+Add Movement Action
+Reload
+Reset Cooldowns
+
+Teleport
+
+Teleport 必须让玩家选择合法 Tile，
+并使用游戏现有 tile validation。
+
+不要直接修改世界坐标。
+
+实验功能：
+
+Revive Dead Soldier
+
+如果无法构造合法 Unit State，
+不要实现“假复活”。
+
+必须确认：
+- soldier roster state
+- tactical unit state
+- inventory state
+- mission state
+均能正常同步。
+
+否则 UI 显示：
+
+该功能当前版本不安全，已禁用。
+
+==================================================
+九、任务控制
+==================================================
+
+读取当前 Mission Objective 列表。
+
+显示：
+
+Localised Objective Name
+Internal Objective ID
+State
+
+例如：
+
+✓ Destroy Relay
+□ Neutralize All Hostile Targets
+
+支持：
+
+Complete Selected Objective
+
+Complete All Active Objectives
+
+Skip Current Objective
+
+Restart Mission
+
+Restart Mission With Same Seed（如果 API 支持）
+
+End Mission As Victory
+
+End Mission As Failure
+
+Evacuate Squad
+
+End Mission As Victory 必须：
+先检查当前任务状态，
+使用正常 Mission/GameState 流程结束任务。
+
+不要仅隐藏任务 UI。
+
+==================================================
+十、任务救急
+==================================================
+
+提供一个：
+
+“修复任务”
+
+页面。
+
+功能：
+
+检测：
+Active Objectives
+Enemy Units
+XCOM Units
+Mission State
+Reinforcements
+
+显示可能异常：
+
+Objective 已完成但未更新
+没有存活敌人但 Sweep 未完成
+AI turn hang
+单位没有合法 Tile
+
+允许：
+
+Refresh Objective State
+Clear AI Hang
+Complete Sweep
+Skip AI Turn
+
+这些功能优先用于处理 XCOM 2 常见任务 bug。
+
+==================================================
+十一、危险功能
+==================================================
+
+以下功能放入单独页面：
+
+Spawn Soldier
+Change Soldier Class
+Change Rank
+Revive Dead Soldier
+Complete All Objectives
+End Mission As Victory
+Clear Avatar Project
+Add Story Items
+
+每次必须二次确认：
+
+“该操作可能改变战役状态，建议提前保存。”
+
+==================================================
+十二、本地化
+==================================================
+
+必须提供：
+
+INT
+CHS
+
+全部主要 UI 使用中文。
+
+例如：
+
+Trainer Panel = 修改器
+Resources = 资源
+Personnel = 人员
+Soldiers = 士兵
+Strategy = 战略
+Items = 装备
+Tactical = 战术
+Mission = 任务
+
+God Mode = 无敌
+Unlimited Actions = 无限行动
+One Hit Kill = 一击必杀
+Add Soldier = 添加士兵
+Heal All Soldiers = 治疗所有士兵
+Complete Objective = 完成任务目标
+End Mission As Victory = 按胜利结束任务
+
+==================================================
+十三、日志
+==================================================
+
+所有操作记录：
+
+[WOTCTrainer]
+
+例如：
+
+[WOTCTrainer] Supplies: 125 -> 625
+[WOTCTrainer] Added Rookie: Wang Li
+[WOTCTrainer] GodMode Enabled
+[WOTCTrainer] Objective Sweep forced complete
+
+==================================================
+十四、安全
+==================================================
+
+Mod 禁止：
+
+修改 exe
+DLL injection
+memory patch
+AOB scanning
+直接修改 save binary
+修改 Steam 文件
+
+只允许：
+
+Mod 自身文件
+Mod config
+游戏合法 GameState
+
+==================================================
+十五、开发阶段
+==================================================
+
+不要一次全部写完。
+
+Phase 1：
+建立工程
+战略层 DEBUG 按钮
+资源修改
+工程师/科学家
+Heal All Soldiers
+
+编译并实际进游戏测试。
+
+Phase 2：
+Add Rookie
+职业指定
+军衔指定
+士兵编辑器
+
+Phase 3：
+战术 DEBUG 面板
+God Mode
+Unlimited Actions
+Ammo
+Cooldown
+Hit/Crit
+
+Phase 4：
+Mission Objective 浏览与修改
+End Mission
+Restart Mission
+AI Hang repair
+
+Phase 5：
+动态物品浏览器
+Avatar Project
+Covert Action
+Proving Ground
+
+Phase 6：
+实验性复活、传送、任务修复功能
+
+每个 Phase：
+编译
+运行
+检查 Launch.log
+游戏内实际验证
+Git commit
+
+前一阶段未验证通过，不得进入下一阶段。

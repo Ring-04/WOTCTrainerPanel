@@ -1,0 +1,12 @@
+/.vs/
+/work/
+/build/
+/dist/
+*.suo
+*.user
+*.log
+*.u
+*.upk
+*.XComSave
+/evidence/source-index.json
+
