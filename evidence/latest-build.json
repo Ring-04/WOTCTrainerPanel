@@ -1,0 +1,19 @@
+{
+  "Time": "2026-09-24T21:23:38.5891074+08:00",
+  "Compiler": "%USERPROFILE%\\Documents\\Codex\\2026-09-24\\files-pasted-by-the-user-xcom\\work\\sdk-clean\\Binaries\\Win64\\XComGame.com",
+  "Arguments": [
+    "make",
+    "-nopause",
+    "-unattended",
+    "-nohomedir",
+    "-mods",
+    "WOTCTrainerPanel",
+    "%USERPROFILE%\\Documents\\Codex\\2026-09-24\\files-pasted-by-the-user-xcom\\work\\sdk-clean\\XComGame\\Mods\\WOTCTrainerPanel\\"
+  ],
+  "ExitCode": 0,
+  "BinaryExists": true,
+  "BuildSucceeded": true,
+  "Log": "%USERPROFILE%\\Documents\\Codex\\2026-09-24\\files-pasted-by-the-user-xcom\\outputs\\WOTCTrainerPanel\\evidence\\build-20260924-212318.txt",
+  "InGameVerified": false,
+  "BinarySHA256": "09A1383F1B8B6783E7420B1A251905C882A92C6BCC8294282D637EBEC20706CB"
+}

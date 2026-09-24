@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Default" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Guid>28d8db13-5c5d-4ed3-a04c-47d53ae50108</Guid>
+    <Name>WOTC Trainer Panel</Name>
+    <SafeName>WOTCTrainerPanel</SafeName>
+    <Description>In-game single-player trainer. Phase 1: strategy resources, staff and healing.</Description>
+    <SteamPublishID>0</SteamPublishID>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Config\*.ini" />
+    <Content Include="Localization\*.*" />
+    <Content Include="Src\WOTCTrainerPanel\Classes\*.uc" />
+  </ItemGroup>
+  <Import Project="$(MSBuildLocalExtensionPath)\XCOM2.targets" />
+</Project>
