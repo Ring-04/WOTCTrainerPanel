@@ -1,0 +1,178 @@
+{
+  "Title": [
+    "Trainer Panel",
+    "修改器"
+  ],
+  "PhaseNotice": [
+    "Phase 1 preview: resources, staff and healing. Save before testing.",
+    "Phase 1 测试版：资源、人员与全员治疗。请先保存，再进行测试。"
+  ],
+  "Tabs[0]": [
+    "Resources",
+    "资源"
+  ],
+  "Tabs[1]": [
+    "Personnel",
+    "人员"
+  ],
+  "Tabs[2]": [
+    "Soldiers",
+    "士兵"
+  ],
+  "Tabs[3]": [
+    "Strategy",
+    "战略"
+  ],
+  "Tabs[4]": [
+    "Items",
+    "装备"
+  ],
+  "Tabs[5]": [
+    "Tactical",
+    "战术"
+  ],
+  "Tabs[6]": [
+    "Mission",
+    "任务"
+  ],
+  "Tabs[7]": [
+    "Dangerous",
+    "危险功能"
+  ],
+  "Resources[0]": [
+    "Supplies",
+    "补给"
+  ],
+  "Resources[1]": [
+    "Intel",
+    "情报"
+  ],
+  "Resources[2]": [
+    "Alien Alloys",
+    "外星合金"
+  ],
+  "Resources[3]": [
+    "Elerium Crystals",
+    "超铀水晶"
+  ],
+  "Resources[4]": [
+    "Elerium Cores",
+    "超铀核心"
+  ],
+  "Resources[5]": [
+    "XCOM Ability Points",
+    "XCOM 共享 AP"
+  ],
+  "CurrentValue": [
+    "Current value",
+    "当前数值"
+  ],
+  "QuickAdd": [
+    "Quick add (preview before applying)",
+    "快捷增加（确认后生效）"
+  ],
+  "SetValue": [
+    "Set value...",
+    "自定义数值"
+  ],
+  "Confirm": [
+    "Confirm change",
+    "确认修改"
+  ],
+  "Cancel": [
+    "Cancel",
+    "取消"
+  ],
+  "Close": [
+    "Close",
+    "关闭"
+  ],
+  "Arrow": [
+    " → ",
+    " → "
+  ],
+  "Engineers": [
+    "Engineers",
+    "工程师"
+  ],
+  "Scientists": [
+    "Scientists",
+    "科学家"
+  ],
+  "AddEngineer": [
+    "+1 Engineer",
+    "+1 工程师"
+  ],
+  "AddScientist": [
+    "+1 Scientist",
+    "+1 科学家"
+  ],
+  "PersonnelHelp": [
+    "Create a new, unique staff member through the game's personnel generator. Identity, appearance, skill and HQ roster use the normal reward flow.",
+    "通过游戏自身流程生成全新且唯一的人员，自动设置合法身份、外观和技能等级，并加入复仇者号人员名单。"
+  ],
+  "HealAll": [
+    "Heal all soldiers",
+    "治疗所有士兵"
+  ],
+  "HealingCount": [
+    "Eligible healing projects",
+    "可完成的士兵治疗项目"
+  ],
+  "HealingHelp": [
+    "Complete normal healing projects for living, uncaptured soldiers in the HQ roster. Restores HP and clears wounds. The original game may also raise Will to the Ready threshold and resume paused Psi training. Dead/captured units and units without a legal healing project are excluded.",
+    "完成兵营中存活、未被俘士兵的正常治疗项目，恢复生命并解除伤势。按原版规则，可能将意志恢复至就绪下限，并恢复暂停的灵能训练。死亡、被俘或没有合法治疗项目的单位不会被处理。"
+  ],
+  "NothingToHeal": [
+    "No eligible healing projects.",
+    "当前没有符合条件的士兵治疗项目。"
+  ],
+  "PendingPhase": [
+    "Not implemented in this build.",
+    "当前版本尚未实现。"
+  ],
+  "Applied": [
+    "Applied:",
+    "已提交："
+  ],
+  "Added": [
+    "Added:",
+    "新增："
+  ],
+  "CompletedCount": [
+    "Completed before stopping:",
+    "停止前已完成："
+  ],
+  "InvalidNumber": [
+    "Enter an integer from 0 to 2147483647. Negative, decimal and overflowing values are rejected.",
+    "请输入 0 至 2147483647 的整数；不接受负数、小数或超出范围的值。"
+  ],
+  "Unavailable": [
+    "This action is only available in an active single-player strategy campaign.",
+    "此操作仅在已载入的单机战略战役中可用。"
+  ],
+  "Stale": [
+    "The game state changed. Nothing new was applied; refresh and confirm again.",
+    "游戏状态已变化，本次未继续提交。请刷新后重新确认。"
+  ],
+  "SubmitFailed": [
+    "The game rejected the submission.",
+    "游戏未接受本次状态提交。"
+  ],
+  "VerifyFailed": [
+    "Post-submit verification did not match. Check the game and Launch.log before repeating this operation.",
+    "提交后的数据与预期不符。请检查游戏和 Launch.log，再决定是否重试。"
+  ],
+  "MissingResource": [
+    "The resource entry is missing from HQ inventory. No change was submitted.",
+    "HQ 库存缺少此资源条目，本次未提交修改。"
+  ],
+  "SaveReminder": [
+    "This operation may change campaign state. Save beforehand.",
+    "该操作可能改变战役状态，建议提前保存。"
+  ],
+  "InputTitle": [
+    "Set a new total (0 to 2147483647)",
+    "设置新总数（0 至 2147483647）"
+  ]
+}

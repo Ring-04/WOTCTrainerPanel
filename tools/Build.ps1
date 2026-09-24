@@ -39,6 +39,9 @@ $evidence = Join-Path $repo 'evidence'
 New-Item -ItemType Directory -Path $evidence -Force | Out-Null
 $timestamp = Get-Date -Format 'yyyyMMdd-HHmmss'
 $log = Join-Path $evidence "build-$timestamp.txt"
+$sourceFiles = @(Get-ChildItem -LiteralPath (Join-Path $repo 'Src'), (Join-Path $repo 'Config'), (Join-Path $repo 'Localization') -Recurse -File | Sort-Object FullName | ForEach-Object {
+    [pscustomobject]@{ Path = $_.FullName.Substring($repo.Length + 1).Replace('\', '/'); SHA256 = (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash }
+})
 $argsList = @('make', '-nopause', '-unattended', '-nohomedir', '-mods', $modName, ($stage + '\'))
 Push-Location (Split-Path -Parent $compiler)
 try {
@@ -46,11 +49,14 @@ try {
     $compilerExit = $LASTEXITCODE
 } finally { Pop-Location }
 Get-Content -LiteralPath $log -Tail 18 | Write-Output
-$success = $compilerExit -eq 0 -and (Test-Path -LiteralPath $binary -PathType Leaf)
+$summary = @(Select-String -LiteralPath $log -Pattern '^Success - 0 error' | ForEach-Object Line)
+$modWarnings = @(Select-String -LiteralPath $log -Pattern 'WOTCTrainerPanel\\Classes.*: Warning,').Count
+$success = $compilerExit -eq 0 -and $summary.Count -gt 0 -and (Test-Path -LiteralPath $binary -PathType Leaf)
 $result = [ordered]@{
     Time = (Get-Date).ToString('o'); Compiler = $compiler; Arguments = $argsList
     ExitCode = $compilerExit; BinaryExists = (Test-Path -LiteralPath $binary -PathType Leaf)
     BuildSucceeded = $success; Log = $log; InGameVerified = $false
+    CompilerSummary = $summary; ModWarningCount = $modWarnings; SourceFiles = $sourceFiles
 }
 if ($success) {
     Copy-Item -LiteralPath $binary -Destination (Join-Path $stage "Script\$modName.u") -Force

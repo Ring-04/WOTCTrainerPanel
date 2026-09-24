@@ -9,4 +9,4 @@
 *.upk
 *.XComSave
 /evidence/source-index.json
-
+/evidence/build-20*.txt

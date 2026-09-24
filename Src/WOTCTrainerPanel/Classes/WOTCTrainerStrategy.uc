@@ -181,6 +181,7 @@ static function array<StateObjectReference> HealingProjects()
 
 static function bool HealAll(array<StateObjectReference> ExpectedProjects, out int Healed, out name ErrorCode)
 {
+	local XComGameState_HeadquartersXCom HQ;
 	local array<StateObjectReference> CurrentProjects;
 	local XComGameState_HeadquartersProjectHealSoldier Project;
 	local XComGameState_Unit Unit;
@@ -227,7 +228,8 @@ static function bool HealAll(array<StateObjectReference> ExpectedProjects, out i
 		Order.AcquireObjectReference = Project.GetReference();
 		class'XComGameStateContext_HeadquartersOrder'.static.IssueHeadquartersOrder(Order);
 		Unit = XComGameState_Unit(`XCOMHISTORY.GetGameStateForObjectID(UnitID));
-		if (Unit == none || Unit.GetCurrentStat(eStat_HP) != Unit.GetBaseStat(eStat_HP) || Unit.GetStatus() == eStatus_Healing)
+		HQ = GetHQ();
+		if (HQ == none || HQ.Projects.Find('ObjectID', ExpectedProjects[I].ObjectID) != INDEX_NONE || Unit == none || Unit.GetCurrentStat(eStat_HP) != Unit.GetBaseStat(eStat_HP) || Unit.GetStatus() == eStatus_Healing)
 		{
 			ErrorCode = 'VerifyFailed';
 			`log("[WOTCTrainer] Heal verification failed: ObjectID=" $ UnitID $ "; already healed=" $ Healed, true, 'WOTCTrainer');

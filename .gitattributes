@@ -5,4 +5,4 @@
 *.ini text eol=crlf
 *.INT binary
 *.CHS binary
-
+*.CHN binary
