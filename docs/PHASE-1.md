@@ -1,6 +1,6 @@
 # Phase 1 验收记录
 
-状态：**BLOCKED — 未找到本机 WOTC SDK**。
+状态：**BLOCKED — WOTC SDK 安装目录为空；Steam 下载报 No connection to content servers，未取得源码与编译器**。
 
 目前完成的是基础仓库与只读开发工具。下列功能、编译及运行项目全部待完成；本记录没有通过项可以替代游戏实测。
 
@@ -47,4 +47,3 @@
 ## 后续阶段（未开始）
 
 Phase 2 人员/士兵编辑器；Phase 3 战术面板；Phase 4 任务与 AI 救急；Phase 5 动态装备和战略功能；Phase 6 复活、传送等实验功能。严格保留原始需求中的阶段边界。
-

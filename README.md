@@ -2,7 +2,7 @@
 
 仅面向 Steam Windows 版 **XCOM 2: War of the Chosen** 的游戏内单机修改器。
 
-**当前状态：Phase 1 环境准备；SDK 阻塞。此仓库还不是可安装 Mod，没有编译后的脚本包。**
+**当前状态：Phase 1 环境准备；SDK 下载失败，环境阻塞。此仓库还不是可安装 Mod，没有编译后的脚本包。**
 
 已建立本地 Git 仓库、保存完整需求、定义 Phase 1 验收条件，并提供只读环境检查和源码取证工具。尚未编写 UnrealScript 游戏调用；未生成或假定 ModBuddy 工程模板；未编译、未启动游戏验证、未修改游戏或存档。
 
@@ -34,7 +34,8 @@
 ## 已观察到的本机状态
 
 - Steam WOTC 游戏：`C:\SteamLibrary\steamapps\common\XCOM 2\XCom2-WarOfTheChosen`。
-- 在已检查的本机 Steam 库及常见开发目录中未发现 WOTC SDK。
+- 本轮检查期间，`D:\steam\steamapps\common\XCOM 2 War of the Chosen SDK` 新建了安装目录，但仍为空，源码和编译器未到位。
+- Steam 的 `content_log.txt` 在 2026-09-24 20:44:58 报告 SDK 下载失败：`No connection to content servers`。需要先恢复 Steam 下载并完成 SDK 安装。
 - 检查时游戏未运行。既有 `Launch.log` 包含 `-allowconsole`；用户配置的语言值为 `INT`。这只是旧环境记录，不能代替本 Mod 的 CHS / 无控制台验收。
 
-最新机器检查见 [环境报告](evidence/environment.json)。
+最新机器检查见 [环境报告](evidence/environment.json)，本轮脚本验证和下载阻塞记录见 [检查记录](evidence/bootstrap-checks.md)。
