@@ -198,7 +198,7 @@ static function string Details(name TemplateName)
 	if (Template == none) return "";
 	Text = class'WOTCTrainerText'.static.Escape(Label(Template));
 	Text $= "<br>" $ class'WOTCTrainerText'.default.InternalName $ ": " $ string(Template.DataName);
-	Text $= " | " $ class'WOTCTrainerText'.default.CategoryLabel $ ": " $ CategoryText(Template.ItemCat) $ " | Tier " $ Template.Tier;
+	Text $= " | " $ class'WOTCTrainerText'.default.CategoryLabel $ ": " $ CategoryText(Template.ItemCat) $ " | " $ class'WOTCTrainerText'.default.LabelTier $ " " $ Template.Tier;
 	Equipment = X2EquipmentTemplate(Template);
 	if (Equipment != none) Text $= " | " $ class'WOTCTrainerText'.default.SlotLabel $ ": " $ SlotText(Equipment);
 	Text $= "<br>" $ class'WOTCTrainerText'.default.OwnedLabel $ ": " $ OwnedQuantity(TemplateName);

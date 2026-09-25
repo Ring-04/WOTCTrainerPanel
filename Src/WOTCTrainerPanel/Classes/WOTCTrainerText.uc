@@ -35,7 +35,7 @@ var localized string InputTitle;
 var localized string SoldierEditor, Refresh, Barracks, RestoreDefault, FullHeal, RestoreWill, RemoveTraits, RankAndClass;
 var localized string SoldierFields[9];
 var localized string SoldierHelp, TemplateDefault, SpawnHelp, SpawnSoldier, Promote, Demote, UnsafeDemote, Revive, Unsafe;
-var localized string ClassLabel, RankLabel, CountLabel, RookieClass, SelectSoldierFirst, CountInput;
+var localized string ClassLabel, RankLabel, CountLabel, LabelID, LabelTier, RookieClass, SelectSoldierFirst, CountInput;
 var localized string Bounds, Unsupported, FactionLocked, UnitUnavailable, HealFirst, WillFirst, XPCap, NoWillProject;
 var localized string TacticalToggles[12], TacticalActions[5], TacticalHelp, TacticalUnavailable, Teleport, SelectedUnit, ActionPoints, OnLabel, OffLabel;
 var localized string MissionControl, ObjectiveHelp, MissionState, Enemies, Reinforcements, InvalidTiles, PendingSubmission, NoEnemiesHint;

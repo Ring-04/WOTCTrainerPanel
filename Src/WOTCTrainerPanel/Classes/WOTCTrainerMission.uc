@@ -248,8 +248,8 @@ static function string Diagnostics()
 		if (Spawner.SpawnedUnitIDs.Length == 0) ++Reinforcements;
 	List = Objectives();
 	for (I = 0; I < List.Length; ++I) { ++Total; if (List[I].bCompleted) ++Done; }
-	Result = class'WOTCTrainerText'.default.MissionState @ string(`TACTICALRULES.GetStateName()) $ " | ID" @ Battle.m_iMissionID;
-	Result $= "<br>XCOM: " $ XComCount $ " | " $ class'WOTCTrainerText'.default.Enemies $ ": " $ EnemyCount $ " | " $ class'WOTCTrainerText'.static.TeamText(eTeam_TheLost) $ ": " $ LostCount;
+	Result = class'WOTCTrainerText'.default.MissionState @ string(`TACTICALRULES.GetStateName()) $ " | " $ class'WOTCTrainerText'.default.LabelID @ Battle.m_iMissionID;
+	Result $= "<br>" $ class'WOTCTrainerText'.default.TeamXCom $ ": " $ XComCount $ " | " $ class'WOTCTrainerText'.default.Enemies $ ": " $ EnemyCount $ " | " $ class'WOTCTrainerText'.static.TeamText(eTeam_TheLost) $ ": " $ LostCount;
 	Result $= "<br>" $ class'WOTCTrainerText'.default.Reinforcements $ ": " $ Reinforcements $ " | " $ class'WOTCTrainerText'.default.InvalidTiles $ ": " $ InvalidTiles;
 	Result $= "<br>" $ class'WOTCTrainerText'.default.PendingSubmission $ ": " $ class'WOTCTrainerText'.static.ToggleText(`TACTICALRULES.IsDoingLatentSubmission()) $ " | " $ class'WOTCTrainerText'.default.TurnOwner $ ": " $ TurnPlayerLabel();
 	Result $= "<br>" $ class'WOTCTrainerText'.default.ObjectiveList $ ": " $ Done $ "/" $ Total $ " " $ class'WOTCTrainerText'.default.CompletedLabel;

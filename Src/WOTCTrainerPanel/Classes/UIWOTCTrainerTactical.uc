@@ -38,7 +38,7 @@ simulated function RefreshValues()
 	if (Controller != none) SelectedID = Controller.GetActiveUnitStateRef().ObjectID;
 	Unit = class'WOTCTrainerTactical'.static.UnitByID(SelectedID);
 	if (Unit == none) SelectedText.SetText(class'WOTCTrainerText'.default.TacticalUnavailable);
-	else SelectedText.SetText(class'WOTCTrainerText'.default.SelectedUnit @ class'WOTCTrainerText'.static.Escape(Unit.GetName(eNameType_Full)) @ "| HP" @ int(Unit.GetCurrentStat(eStat_HP)) $ "/" $ int(Unit.GetMaxStat(eStat_HP)) @ "|" @ class'WOTCTrainerText'.default.ActionPoints @ Unit.ActionPoints.Length);
+	else SelectedText.SetText(class'WOTCTrainerText'.default.SelectedUnit @ class'WOTCTrainerText'.static.Escape(Unit.GetName(eNameType_Full)) @ "|" @ class'WOTCTrainerText'.default.SoldierFields[0] @ int(Unit.GetCurrentStat(eStat_HP)) $ "/" $ int(Unit.GetMaxStat(eStat_HP)) @ "|" @ class'WOTCTrainerText'.default.ActionPoints @ Unit.ActionPoints.Length);
 	for (I = 0; I < 12; ++I)
 	{
 		Toggles[I].SetText(class'WOTCTrainerText'.default.TacticalToggles[I] $ ": " $ class'WOTCTrainerText'.static.ToggleText(class'XComGameState_WOTCTrainer'.static.Enabled(I, SelectedID)));

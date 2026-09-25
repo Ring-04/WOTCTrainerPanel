@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)][string]$SdkRuntime,
-    [string]$Version = '0.5.2-test'
+    [string]$Version = '0.5.3-test'
 )
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'

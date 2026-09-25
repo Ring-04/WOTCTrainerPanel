@@ -291,6 +291,14 @@
     "Quantity",
     "数量"
   ],
+  "LabelID": [
+    "ID",
+    "编号"
+  ],
+  "LabelTier": [
+    "Tier",
+    "等级"
+  ],
   "RookieClass": [
     "Rookie promotion class:",
     "新兵晋升职业："
@@ -500,11 +508,11 @@
     "已完成"
   ],
   "SkipAIHelp": [
-    "Current enemy player: active turn -> skip requested. Uses the normal SkipTurn state context. This may resolve some AI stalls, but not animation or latent-submission hangs.",
+    "Current enemy player: active turn → skip requested. Uses the normal SkipTurn state context. This may resolve some AI stalls, but not animation or latent-submission hangs.",
     "当前敌方玩家：行动中 → 请求跳过回合。使用原版 SkipTurn 状态流程，可用于部分 AI 卡顿；无法处理动画或潜在状态提交卡死。"
   ],
   "RestartHelp": [
-    "Current mission progress -> original mission restart. Unsaved tactical progress is lost. Disabled for Ironman and tutorials. The same random seed is not guaranteed.",
+    "Current mission progress → original mission restart. Unsaved tactical progress is lost. Disabled for Ironman and tutorials. The same random seed is not guaranteed.",
     "当前任务进度 → 原版重开任务。未保存的战术进度会丢失。铁人和教程中禁用；不保证随机种子相同。"
   ],
   "EndMissionHelp": [

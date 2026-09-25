@@ -79,7 +79,7 @@ simulated function RefreshDetails()
 	if (Unit.GetCountryTemplate() != none) Country = Unit.GetCountryTemplate().DisplayName;
 	Label = class'WOTCTrainerText'.static.Escape(Unit.GetName(eNameType_Full)) @ class'WOTCTrainerText'.static.Escape(Unit.GetNickName()) @ "|" @ Country;
 	Label $= "<br>" $ Unit.GetSoldierClassTemplate().DisplayName @ "|" @ class'X2ExperienceConfig'.static.GetRankName(Unit.GetSoldierRank(), Unit.GetSoldierClassTemplateName());
-	Label $= " | " $ Unit.GetMentalStateLabel() $ " | ID " $ Unit.ObjectID;
+	Label $= " | " $ Unit.GetMentalStateLabel() $ " | " $ class'WOTCTrainerText'.default.LabelID $ " " $ Unit.ObjectID;
 	if (class'WOTCTrainerSoldiers'.static.EditableUnit(SelectedID) == none) Label $= "<br>" $ class'WOTCTrainerText'.default.UnitUnavailable;
 	Details.SetText(Label);
 	for (I = 0; I < 9; ++I) Values[I].SetText(string(class'WOTCTrainerSoldiers'.static.Value(Unit, I)));
