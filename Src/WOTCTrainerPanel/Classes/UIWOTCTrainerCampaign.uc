@@ -37,7 +37,7 @@ simulated function OnInit()
 	AddButton(Root, 'FacilityNow', class'WOTCTrainerText'.default.CampaignFacilityNow, 720, 331, 300, 402);
 	AddButton(Root, 'RefundNow', class'WOTCTrainerText'.default.CampaignRefundNow, 1030, 331, 320, 404);
 	AddButton(Root, 'CovertNow', class'WOTCTrainerText'.default.CampaignCovertNow, 720, 377, 630, 403);
-	AddText(Root, 'QueueHelp', class'WOTCTrainerText'.default.CampaignQueueHelp $ "<br><br>" $ class'WOTCTrainerText'.default.CampaignNoProvingGround, 720, 425, 630, 120);
+	AddText(Root, 'QueueHelp', class'WOTCTrainerText'.default.CampaignQueueHelp $ "<br>" $ class'WOTCTrainerText'.default.CampaignNoProvingGround, 720, 425, 630, 125);
 	AddText(Root, 'SquadHeader', class'WOTCTrainerText'.default.CampaignHeaderSquad, 720, 555, 630, 40, true);
 	SquadInfo = AddText(Root, 'SquadInfo', "", 720, 595, 630, 50);
 	AddButton(Root, 'HealAll', class'WOTCTrainerText'.default.CampaignHealAll, 720, 652, 300, 500);

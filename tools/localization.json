@@ -880,8 +880,8 @@
     "清空化身进度"
   ],
   "CampaignAvatarHelp": [
-    "Writes the real strategy GameState Doom values, the same fields the vanilla reduce-doom reward touches. Alien facility Doom is drained before the irreversible core. The geoscape HUD reads those values live, so no UI number is written directly.",
-    "直接修改战略层 GameState 的 Doom 数值，与原版「降低化身进度」奖励写入的字段一致。优先扣除外星设施，其次扣除不可逆核心。地貌界面 HUD 是实时读取这些数值的，因此没有直接改写任何 UI 数字。"
+    "Drains real strategy GameState Doom: largest alien facility first, then the irreversible core. The geoscape HUD reads these values live.",
+    "直接扣减战略层 GameState 的 Doom：先扣最大的外星设施，再扣不可逆核心。地貌界面 HUD 实时读取这些值。"
   ],
   "CampaignAvatarFromSites": [
     "facilities -",
@@ -948,12 +948,12 @@
     "退还建造花费"
   ],
   "CampaignQueueHelp": [
-    "Each button runs the same completion routine the strategy tick uses when a project timer expires, so the project, its notifications and its cleanup all follow the vanilla path.",
-    "每个按钮调用的是战略层计时结束时原版使用的同一套完成流程，因此项目本体、提示与收尾都走原版逻辑。"
+    "These buttons run the vanilla project-completion routine.",
+    "这些按钮调用原版的项目完成流程。"
   ],
   "CampaignNoProvingGround": [
-    "The Proving Ground buttons only apply once that facility has been built and has projects in its own build queue. Facility refunds do not cancel construction; they only pay the cost back.",
-    "试验场按钮仅在该设施已建造、且其建造队列中有项目时才有效。退还花费不会取消建造，只是把费用退回。"
+    "Proving Ground buttons need that facility built with projects queued. Refunds pay the build cost back but do not cancel construction.",
+    "试验场按钮需该设施已建造且其队列中有项目。退还花费只退回费用，不取消建造。"
   ],
   "CampaignHeaderSquad": [
     "Squad recovery",
