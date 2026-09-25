@@ -13,16 +13,24 @@ static function X2ItemTemplateManager Manager()
 // either duplicates the resource page or injects a story item whose OnAcquiredFn the campaign
 // never expected. Infinite items are already unlimited, and PutItemInInventory drops them, so
 // granting one would silently do nothing.
-static function bool Excluded(X2ItemTemplate Template, out name Reason)
+// bIncludeHidden only lifts the story-item filter; resources, schematics and templates without
+// display data stay excluded because granting them is a no-op or worse, not merely story content.
+static function bool Excluded(X2ItemTemplate Template, bool bIncludeHidden, out name Reason)
 {
 	Reason = '';
 	if (Template == none) { Reason = 'Unknown'; return true; }
 	if (Template.bInfiniteItem) { Reason = 'Infinite'; return true; }
-	if (Template.HideInInventory) { Reason = 'Hidden'; return true; }
 	if (Template.ItemCat == 'resource') { Reason = 'Resource'; return true; }
 	if (X2SchematicTemplate(Template) != none) { Reason = 'Schematic'; return true; }
 	if (!Template.HasDisplayData()) { Reason = 'NoDisplay'; return true; }
+	if (!bIncludeHidden && Template.HideInInventory) { Reason = 'Hidden'; return true; }
 	return false;
+}
+
+// HideInInventory is how the game marks story, mission and quest templates.
+static function bool IsStory(X2ItemTemplate Template)
+{
+	return Template != none && Template.HideInInventory;
 }
 
 static function string Label(X2ItemTemplate Template)
@@ -91,7 +99,7 @@ static function string SlotText(X2EquipmentTemplate Equipment)
 	return class'WOTCTrainerText'.default.SlotUnknown;
 }
 
-static function array<name> Categories()
+static function array<name> Categories(bool bIncludeHidden)
 {
 	local X2DataTemplate Data;
 	local X2ItemTemplate Template;
@@ -101,7 +109,7 @@ static function array<name> Categories()
 	foreach Manager().IterateTemplates(Data, none)
 	{
 		Template = X2ItemTemplate(Data);
-		if (Excluded(Template, Reason)) continue;
+		if (Excluded(Template, bIncludeHidden, Reason)) continue;
 		Result.AddItem(Template.ItemCat);
 	}
 	for (I = 1; I < Result.Length; ++I)
@@ -116,10 +124,19 @@ static function array<name> Categories()
 	return Result;
 }
 
+// Term is matched against the friendly label and the internal template name, the same
+// case-insensitive InStr idiom UIShell.uc:627 uses. An empty term matches everything.
+static function bool Matches(X2ItemTemplate Template, string Term)
+{
+	if (Term == "") return true;
+	if (InStr(Label(Template), Term, , true) > INDEX_NONE) return true;
+	return InStr(string(Template.DataName), Term, , true) > INDEX_NONE;
+}
+
 // Category == '' selects every category. Labels runs parallel to the returned names so the
 // panel can draw rows without re-resolving a whole template per frame. ExcludedCount reports
 // how many templates the filters above removed, so the panel can say the list is not exhaustive.
-static function array<name> Items(name Category, out array<string> Labels, out int ExcludedCount)
+static function array<name> Items(name Category, string Search, bool bIncludeHidden, out array<string> Labels, out int ExcludedCount)
 {
 	local X2DataTemplate Data;
 	local X2ItemTemplate Template;
@@ -133,8 +150,9 @@ static function array<name> Items(name Category, out array<string> Labels, out i
 	foreach Manager().IterateTemplates(Data, none)
 	{
 		Template = X2ItemTemplate(Data);
-		if (Excluded(Template, Reason)) { ++ExcludedCount; continue; }
+		if (Excluded(Template, bIncludeHidden, Reason)) { ++ExcludedCount; continue; }
 		if (Category != '' && Template.ItemCat != Category) continue;
+		if (!Matches(Template, Search)) continue;
 		Key = Template.DataName;
 		Text = Label(Template);
 		for (J = Result.Length; J > 0; --J)
@@ -191,7 +209,7 @@ static function string Details(name TemplateName)
 // Mirrors the instant-build branch of UIInventory_BuildItems.uc:393 without the cost, build
 // project or the upgrade substitution that XComGameState_HeadquartersXCom.uc:4807 GiveItem
 // applies, so the granted template is always the one the player picked.
-static function bool Grant(name TemplateName, int Quantity, out int NewTotal, out name ErrorCode)
+static function bool Grant(name TemplateName, int Quantity, bool bAllowStory, out int NewTotal, out name ErrorCode)
 {
 	local X2ItemTemplate Template;
 	local XComGameState_HeadquartersXCom HQ, NewHQ;
@@ -209,7 +227,7 @@ static function bool Grant(name TemplateName, int Quantity, out int NewTotal, ou
 		ErrorCode = 'Unavailable';
 		return false;
 	}
-	if (Excluded(Template, Reason))
+	if (Excluded(Template, bAllowStory, Reason))
 	{
 		ErrorCode = 'NotGrantable';
 		return false;

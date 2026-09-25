@@ -133,3 +133,10 @@
 - **退还建造花费的依据**：`XComGameState_HeadquartersProjectBuildFacility` 的取消路径调用 `NewHQ.RefundStrategyCost(Change, Template.Cost, NewHQ.FacilityBuildCostScalars, Project.SavedDiscountPercent)`。训练器镜像同一次调用，只退费、不取消建造；设施升级不退还，因为原版取消路径也不退。界面文字已说明这是退费而非取消。
 - **疲劳即意志**：WOTC 不存储疲劳值，`XComGameState_Unit.UpdateMentalState()` 由当前意志百分比推导 `MentalState`，意志低于上限即 `NeedsWillRecovery()`。所以"恢复全体意志"与"消除疲劳"是同一次写入（`SetCurrentStat(eStat_Will, GetMaxStat(eStat_Will))` 后 `UpdateMentalState()`），面板合并为一个操作并在确认框说明原因；已在医务室休养的士兵改走其自身的 `XComGameState_HeadquartersProjectRecoverWill.OnProjectCompleted()`，以保留床位占用与提示的原版流程。
 - **电力与联系人容量**：`BonusPowerProduced` 与 `BonusCommCapacity` 正是原版奖励 `GiveAvengerPowerReward` / `GiveAvengerResCommsReward` 写入的字段（`X2StrategyElement_DefaultRewards.uc`），都是持久 GameState 值，存档后仍生效。加电力后按原版再调 `HQ.DeterminePowerState()`。
+
+## Phase 5c — 物品浏览器补充核对（2026-09-25，编译通过后）
+
+- **隐藏物品的判定字段**：`X2ItemTemplate.uc:28` `HideInInventory` 是游戏标记剧情/任务/任务奖励类模板的字段（物品栏本就不显示它们），因此"显示剧情物品"开关只解除这一项过滤。资源（`ItemCat == 'resource'`）、图纸（`X2SchematicTemplate`）、`bInfiniteItem` 与无显示数据的模板即使开关打开也仍然排除，因为发放它们不是"剧情风险"，而是空操作或与资源页重复：`XComGameState_HeadquartersXCom.uc:4131` `PutItemInInventory` 会把 `bInfiniteItem` 从状态中移除，`HideInInventory` 物品则改走 `OnAcquiredFn`。等级划分写在 `WOTCTrainerItems.Excluded` 一处，分类列表与物品列表共用同一判定。
+- **搜索匹配**：沿用原版 `UIShell.uc:627` 的 `InStr(Haystack, Needle, , true) > INDEX_NONE` 大小写不敏感写法，同时匹配本地化名称与内部模板名；空串匹配全部。搜索框沿用工程既有的 `TInputDialogData` + `Movie.Pres.UIInputDialog` 输入方式，不新增输入控件。搜索结果回填到按钮文字时经 `WOTCTrainerText.Escape`，避免用户输入的 `<` 破坏 `<br>` 标记。
+- **剧情物品的二次确认**：发放被判定为剧情物品（`HideInInventory`）的模板时，确认框改用 `eDialog_Warning` 变体（基类 `ShowConfirmation(Body, true)`），会附带 `docs/REQUEST.zh-CN.txt` 第十一节要求的"该操作可能改变战役状态，建议提前保存"提示；开关本身就是显式知情同意，界面上方会显示醒目警告文案。
+- **"Add 1 / Add 5 / Add 10" 的落点**：物品页用与资源页一致的"数量快捷键 + 确认发放"流程实现（`+1/+5/+10/+50/+100/+500` 设定数量，`Add to inventory` 提交并二次确认），未再重复三个一次性按钮，以免同一操作出现两套入口。

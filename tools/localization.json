@@ -1002,5 +1002,25 @@
   "CampaignCovertHelp": [
     "Uses the vanilla CompleteCovertAction routine, so the rewards, the completion popup, the resistance activity record and the rookie action refill all follow the original path. Unlike the vanilla timer, action risks are not resolved here, so soldiers on the assignment cannot be wounded or killed by it.",
     "调用原版的 CompleteCovertAction 流程，因此奖励、完成弹窗、抵抗组织活动记录与新手行动补充都走原版逻辑。与原版计时结算不同的是，这里不会结算行动风险，因此执行该行动的士兵不会因此受伤或阵亡。"
+  ],
+  "ItemSearch": [
+    "Search",
+    "搜索"
+  ],
+  "ItemSearchAll": [
+    "all items",
+    "全部物品"
+  ],
+  "ItemStory": [
+    "Show story items",
+    "显示剧情物品"
+  ],
+  "ItemStoryWarn": [
+    "WARNING: story items are listed and selectable. Granting one can fire the acquisition effect the campaign expected to run at a story beat, and some of them cannot be taken back. Save before granting.",
+    "警告：剧情物品已列出并可选择。发放剧情物品可能触发战役原本只在剧情节点触发的获取逻辑，其中一部分无法撤销。发放前请先存档。"
+  ],
+  "ItemExcludedWhyStory": [
+    "templates that are resources, schematics, unlimited items, or carry no display name. Those stay hidden because granting them is a no-op or duplicates the resource page.",
+    "资源、图纸、无限物品，以及没有显示名称的模板。这些仍然隐藏，因为发放它们要么没有效果，要么与资源页重复。"
   ]
 }

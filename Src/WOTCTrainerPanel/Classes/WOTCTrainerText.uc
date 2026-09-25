@@ -47,6 +47,7 @@ var localized string RoleTactical, RoleStrategy, RoleTriad, RoleNone, ObjectiveL
 var localized string VictoryReady, VictoryBlockedBy, TurnOwner, SweepNote, SameSeedWhy, LootSweepBlocked;
 var localized string TeamXCom, TeamAlien, TeamLost, TeamResistance, TeamNeutral, TeamOne, TeamTwo, TeamOther;
 var localized string ItemHelp, ItemExcluded, ItemExcludedWhy, ItemsLabel, ItemAll, ItemEmpty, QuantityLabel, SetQuantity;
+var localized string ItemSearch, ItemSearchAll, ItemStory, ItemStoryWarn, ItemExcludedWhyStory;
 var localized string GrantItem, GrantHelp, InternalName, CategoryLabel, SlotLabel, OwnedLabel, UniqueNote, NotGrantable;
 var localized string CatWeapon, CatArmor, CatUpgrade, CatAmmo, CatUtility, CatUnlimited, CatCombatSim;
 var localized string CatHeal, CatDefense, CatPsiDefense, CatPsiOffense, CatGrenade, CatTech, CatSkulljack;
