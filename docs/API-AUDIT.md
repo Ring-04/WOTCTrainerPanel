@@ -78,3 +78,16 @@
 | UI | Phase 1 已审阅 UI primitives；Core.Object Repl/InStr/Caps 1292–1300 | 列表分页，固定大小按钮；玩家名字转义 HTML；共用确认与输入回调 |
 
 全部显式修改使用 ChangeContainer + ModifyStateObject + SubmitGameState，提交前校验预览值，提交后重读。原版项目完成函数自行提交，不外套重复提交。
+
+## Phase 3 — 战术实现前审核（2026-09-25）
+
+- `XComGameState_BattleData` 87–103/206/870：MissionID、Battle ObjectID、bMultiplayer；设置仅匹配当前单机战斗。`X2TacticalGameRuleset.GetCachedUnitActionPlayerRef` 4801/5462；`X2GameRuleset.IsDoingLatentSubmission` 119；手工操作仅在己方 UnitActions 阶段。
+- `XComTacticalController.GetActiveUnitStateRef` 832；`UITacticalHUD` 原版用例；入口使用现有 UIScreenListener，不调用 CheatManager。
+- `X2EventListenerTemplate.AddEvent/RegisterForEvents` 25–59、DefaultTraits.CreateAcquireTraitsTemplate 108、DefaultTraits 对 InterruptionStatus 的守卫：原版自动注册的 ELD_OnStateSubmitted 监听器，忽略中断帧，仅处理 XCOM 活人士兵；非能力事件不会递归触发 AbilityActivated。
+- `XComGameStateContext_Ability` 191/370/414：AbilityActivated 的 EventData=AbilityState，EventSource=UnitState；`XComGameState_Player` 165：PlayerTurnBegun 的 EventSource=Player。
+- `X2Ability.PurePassive` 1575–1607；`XComGameState_Ability` 2075–2088 原版 EverVigilant 手工施加效果；`EffectAppliedData` 336；`X2Effect.ApplyEffect` 67；`X2Effect_Persistent.HandleApplyEffect` 443–547；`XComGameState_Effect.PostCreateInit` 245–330：创建自身模板中的无行为默认效果，按 SourceTemplateName/TargetEffects/index 定位，修改副本后正常 SubmitGameState；无需控制台或全局作弊开关。
+- `X2Effect_Persistent` 651–691：命中、伤害、免疫、死亡前检查、环境伤害扩展；`X2Effect_DamageImmunity.ProvidesDamageImmunity`；`X2Effect_Sustain.PreDeathCheck` 14–56；`TracerRounds.GetToHitModifiers`；`Executioner.GetAttackingDamageModifier`。效果每次校验 XCOM 士兵及开关；一击必杀限有技能来源且源单位为 XCOM、目标是敌对 Unit，环境 Damageable 不进入。
+- `Unit` ActionPoints 141、GiveStandardActionPoints 6380、GetTeam 9603、IsEnemyUnit 9605、IsAbleToAct 7700、GetAllInventoryItems 7490；`XComTacticalCheatManager.GiveActionPoints` 695–720 和 SetAmmo 3445–3477：仅复用经过审核的合法状态操作，不调用 cheat。
+- `Item.GetClipSize` 854–890、Ammo 字段；`Ability.iCooldown/iCharges` 12/13、`X2AbilityCharges.GetInitialCharges`；填弹上限来自物品及升级件，技能充能上限来自模板，冷却逐一修改所属技能副本。
+- 手工治疗只增加存活单位当前 HP，不清除战略 LowestHP、异常状态或假复活。战术回血不等于战后无伤。
+- 命中/暴击保证仅覆盖原版 StandardAim 系列攻击；独立命中免疫、处决脚本和其他 Mod 的覆盖仍须实机测试。未审核完整合法流程的 FOW、AI、复活和传送暂不启用。

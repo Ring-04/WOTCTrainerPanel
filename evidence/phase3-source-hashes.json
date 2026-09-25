@@ -1,0 +1,90 @@
+[
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\X2Effect_Persistent.uc",
+    "SHA256": "C724EAA1F40B9CE92B46A0C45E97703CE6681638080019673DC8BBACCDFE0DB8"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\X2Effect.uc",
+    "SHA256": "CDE9A982CD875803338CEFFFDDD948777C1A63C6CEBAADBE7F7BB30FDB66AB60"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\X2Effect_Sustain.uc",
+    "SHA256": "1CB8141FD45EE15B78B0D5380EA4516266FF7481221F828AFCFAC72D3A578A75"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\X2Effect_DamageImmunity.uc",
+    "SHA256": "7F5549E84543F70CCBEA94F21F5B21659714FEB8CB60521EFA482476B9177C9B"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\X2Effect_TracerRounds.uc",
+    "SHA256": "86F6B01071493609C810E60F6C0BD5CB90156F310A3BE6F75E7BECDE20C5BE23"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\X2Effect_Executioner.uc",
+    "SHA256": "E571C9C7CB30ACB260DA92F160C42DC0B19A5BEFD8CA535A915C3ED6EDFCB855"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\X2Ability.uc",
+    "SHA256": "4F9886E38017A172F25862C62D629B31D46B645AD98617E1022AE232C3005F68"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\XComGameState_Effect.uc",
+    "SHA256": "5067F0DB3944AFC6D50FB26079C7A6583AFFBF1D10CCF674F27BD84D0AB0D18F"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\XComGameState_Ability.uc",
+    "SHA256": "A509951D61EFB30AFAA551AE5F5B87D300427B923CF475B48E8E1DDE8CDCF2BB"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\XComGameStateContext_Ability.uc",
+    "SHA256": "1EC416845B07B48068FC02E36912585F58813A87FAC82F5A0361269635FAA128"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\XComGameState_Player.uc",
+    "SHA256": "0F6369908DCE7C0F5D8B0A315A52F3A5CC63FBAD885E6B05FC5DF16119B7D948"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\XComGameState_Unit.uc",
+    "SHA256": "8EB47A4EC44F297C961B8F3D207B18B8C25FE2B45D51D915BC7648731B91EDD2"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\XComGameState_Item.uc",
+    "SHA256": "6AB6A4D9FF3B11CC0052490878A9C71C97F49D8705B7A476507A60D766760317"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\XComGameState_BattleData.uc",
+    "SHA256": "89F03CF6AB3560BC98291A6CE4EC3C4FC08D79997F6F75984A85DB7C4AF00B67"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\X2AbilityCharges.uc",
+    "SHA256": "A03E6EE3B4735047352A4B864B1596CD5751889B799478A9313928862D207C1D"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\X2EventListenerTemplate.uc",
+    "SHA256": "2DCC21A93496FE34170D5593E70C55F1F186BEB54482C818B8317037AE4D4388"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\X2EventListener_DefaultTraits.uc",
+    "SHA256": "A69A3D93EB2BE2939B43E10849AFC349B1A0779451B5C0B55CAB40EBEFC963AE"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\X2TacticalGameRuleset.uc",
+    "SHA256": "892B33D42E54EF8745892951A17FEFCCF793CB9568A5FABE0EF7CC0F8C342D92"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\X2GameRuleset.uc",
+    "SHA256": "0599CBF3E860F1F1DC4EA1F032BC990A95D3DC4E0EEB12C8CC00D71AAE7F0EF7"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\XComTacticalController.uc",
+    "SHA256": "9E76581BF5C7F27F06BF40BF157CCFABC5AEE3181FBCC32975DBD1E36F12BA1C"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\UITacticalHUD.uc",
+    "SHA256": "CDD07DAAF8C089D6993B4DE8EA791D9F37F829EA3210987442C8D33F26A0C569"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\X2TacticalGameRulesetDataStructures.uc",
+    "SHA256": "7520A59248DAB0F8C5CC54C9F42A495266CD96BA5F358122B0A109D1B52AA072"
+  }
+]

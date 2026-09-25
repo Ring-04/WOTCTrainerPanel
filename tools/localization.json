@@ -334,5 +334,101 @@
   "NoWillProject": [
     "No legal Will recovery project exists for this soldier; no change was submitted.",
     "该士兵没有合法的意志恢复项目，本次未提交修改。"
+  ],
+  "TacticalHelp": [
+    "Current mission only; XCOM soldiers only. Hit/Crit applies to StandardAim attacks. Healing does not clear status effects or post-mission wounds. Restore cooldowns counts abilities on cooldown. Ammo/No Reload share automatic refill behavior.",
+    "仅限当前任务的 XCOM 士兵。命中/暴击针对标准命中判定攻击。回血不清除异常状态或战后伤势。重置冷却显示冷却中技能数量。无限弹药与无需装填均自动补满弹匣。"
+  ],
+  "TacticalUnavailable": [
+    "Available during an idle XCOM turn in single-player tactical combat; select a living XCOM soldier.",
+    "仅在单机战术的 XCOM 行动阶段可用；请选中存活的 XCOM 士兵并等待当前动作结束。"
+  ],
+  "Teleport": [
+    "Teleport (disabled)",
+    "传送（禁用）"
+  ],
+  "SelectedUnit": [
+    "Selected:",
+    "当前选择："
+  ],
+  "ActionPoints": [
+    "Actions",
+    "行动点"
+  ],
+  "OnLabel": [
+    "ON",
+    "开启"
+  ],
+  "OffLabel": [
+    "OFF",
+    "关闭"
+  ],
+  "TacticalToggles[0]": [
+    "Squad God Mode",
+    "全队无敌"
+  ],
+  "TacticalToggles[1]": [
+    "Selected soldier God Mode",
+    "选中士兵无敌"
+  ],
+  "TacticalToggles[2]": [
+    "Unlimited Actions",
+    "无限行动"
+  ],
+  "TacticalToggles[3]": [
+    "Unlimited Movement",
+    "无限移动"
+  ],
+  "TacticalToggles[4]": [
+    "Shooting Does Not End Turn",
+    "射击不结束回合"
+  ],
+  "TacticalToggles[5]": [
+    "Unlimited Ammo",
+    "无限弹药"
+  ],
+  "TacticalToggles[6]": [
+    "No Reload",
+    "无需装填"
+  ],
+  "TacticalToggles[7]": [
+    "No Ability Cooldown",
+    "无技能冷却"
+  ],
+  "TacticalToggles[8]": [
+    "Unlimited Ability / Item Charges",
+    "无限技能 / 物品充能"
+  ],
+  "TacticalToggles[9]": [
+    "100% Hit Chance",
+    "100% 命中"
+  ],
+  "TacticalToggles[10]": [
+    "100% Critical Chance",
+    "100% 暴击"
+  ],
+  "TacticalToggles[11]": [
+    "One Hit Kill",
+    "一击必杀"
+  ],
+  "TacticalActions[0]": [
+    "Full heal",
+    "恢复全部生命"
+  ],
+  "TacticalActions[1]": [
+    "+1 Action point",
+    "+1 行动点"
+  ],
+  "TacticalActions[2]": [
+    "+1 Movement action",
+    "+1 移动行动点"
+  ],
+  "TacticalActions[3]": [
+    "Reload primary weapon",
+    "装填主武器"
+  ],
+  "TacticalActions[4]": [
+    "Reset cooldowns",
+    "重置技能冷却"
   ]
 }

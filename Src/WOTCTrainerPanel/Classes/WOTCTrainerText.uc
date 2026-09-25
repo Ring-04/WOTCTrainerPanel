@@ -37,6 +37,9 @@ var localized string SoldierFields[9];
 var localized string SoldierHelp, TemplateDefault, SpawnHelp, SpawnSoldier, Promote, Demote, UnsafeDemote, Revive, Unsafe;
 var localized string ClassLabel, RankLabel, CountLabel, RookieClass, SelectSoldierFirst, CountInput;
 var localized string Bounds, Unsupported, FactionLocked, UnitUnavailable, HealFirst, WillFirst, XPCap, NoWillProject;
+var localized string TacticalToggles[12], TacticalActions[5], TacticalHelp, TacticalUnavailable, Teleport, SelectedUnit, ActionPoints, OnLabel, OffLabel;
+
+static function string ToggleText(bool Enabled) { return Enabled ? default.OnLabel : default.OffLabel; }
 
 static function string Escape(string Value)
 {
@@ -47,6 +50,7 @@ static function string ErrorText(name Code)
 {
 	switch (Code)
 	{
+	case 'TacticalUnavailable': return default.TacticalUnavailable;
 	case 'Bounds': return default.Bounds;
 	case 'Unsupported': return default.Unsupported;
 	case 'FactionLocked': return default.FactionLocked;
