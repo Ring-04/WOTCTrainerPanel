@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)][string]$SdkRuntime,
-    [string]$Version = '0.5.3-test'
+    [string]$Version = '0.9.0-beta'
 )
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
@@ -11,7 +11,7 @@ $workspace = [IO.Path]::GetFullPath((Join-Path $repo '..\..\work')).TrimEnd('\')
 if (-not $runtime.StartsWith($workspace + '\', [StringComparison]::OrdinalIgnoreCase)) {
     throw 'SdkRuntime must be an isolated copy under this task workspace work directory. Never pass the Steam SDK installation.'
 }
-if ($Version -notmatch '^[0-9]+\.[0-9]+\.[0-9]+-[A-Za-z0-9.-]+$') { throw 'Version must look like 0.5.0-test.' }
+if ($Version -notmatch '^[0-9]+\.[0-9]+\.[0-9]+-[A-Za-z0-9.-]+$') { throw 'Version must look like 0.9.0-beta.' }
 $modName = 'WOTCTrainerPanel'
 $stage = Join-Path $runtime "XComGame\Mods\$modName"
 if (-not (Test-Path -LiteralPath (Join-Path $stage "$modName.XComMod") -PathType Leaf)) {
@@ -21,7 +21,7 @@ $buildFile = Join-Path $repo 'evidence\latest-build.json'
 if (-not (Test-Path -LiteralPath $buildFile -PathType Leaf)) { throw 'evidence\latest-build.json is missing. Run tools\Build.ps1 first.' }
 $build = Get-Content -LiteralPath $buildFile -Raw | ConvertFrom-Json
 if (-not $build.BuildSucceeded) { throw 'The latest recorded build did not succeed; refusing to package it.' }
-$packageName = "$modName-$Version"
+$packageName = "$modName-v$Version"
 $outRoot = Join-Path $repo 'dist'
 $packageDir = Join-Path $outRoot $packageName
 # dist is a disposable build artifact directory; the checked-in source and the verified staging
@@ -35,7 +35,17 @@ $modDir = Join-Path $packageDir $modName
 Copy-Item -LiteralPath $stage -Destination $modDir -Recurse
 $doc = Join-Path $repo 'docs\INSTALL-AND-TEST.zh-CN.md'
 $hasDoc = Test-Path -LiteralPath $doc -PathType Leaf
-if ($hasDoc) { Copy-Item -LiteralPath $doc -Destination (Join-Path $packageDir 'README.zh-CN.md') }
+foreach ($readme in @('README.md', 'README.zh-CN.md')) {
+    $readmeSource = Join-Path $repo $readme
+    if (Test-Path -LiteralPath $readmeSource -PathType Leaf) {
+        Copy-Item -LiteralPath $readmeSource -Destination (Join-Path $packageDir $readme)
+    }
+}
+if ($hasDoc) {
+    $docTarget = Join-Path $packageDir 'docs'
+    New-Item -ItemType Directory -Path $docTarget -Force | Out-Null
+    Copy-Item -LiteralPath $doc -Destination (Join-Path $docTarget 'INSTALL-AND-TEST.zh-CN.md')
+}
 $files = @(Get-ChildItem -LiteralPath $modDir -Recurse -File | Sort-Object FullName | ForEach-Object {
     [pscustomobject]@{ Path = $_.FullName.Substring($packageDir.Length + 1).Replace('\', '/'); Bytes = $_.Length; SHA256 = (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash }
 })
@@ -45,7 +55,7 @@ if ($binaryEntry.SHA256 -ne $build.BinarySHA256) {
     throw "Packaged binary $($binaryEntry.SHA256) does not match the verified build $($build.BinarySHA256). Rebuild before packaging."
 }
 $installDoc = ''
-if ($hasDoc) { $installDoc = 'README.zh-CN.md' }
+if ($hasDoc) { $installDoc = 'docs/INSTALL-AND-TEST.zh-CN.md' }
 $manifest = [ordered]@{
     Package = $packageName
     ModName = $modName

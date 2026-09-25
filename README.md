@@ -1,55 +1,148 @@
-# WOTC Trainer Panel / 修改器
+# WOTC Trainer Panel
 
-仅支持 Steam Windows 版 XCOM 2: War of the Chosen。
+An in-game trainer and debug panel for **XCOM 2: War of the Chosen** (Steam, Windows). It adds a
+**Trainer Panel** button to the strategy layer and to the tactical HUD. Every change is submitted
+through the game's own GameState / HeadquartersOrder paths: no DLL injection, no memory patching, no
+AOB scanning, no external trainer, no console command, and no modification of `XCom2.exe`, Steam
+files, game configuration or save binaries.
 
-**当前交付：Phase 1–4 已编码并通过编译，尚未进行游戏内验收。实机测试由用户集中执行。Phase 5–6 尚未实现。**
+中文说明：[README.zh-CN.md](README.zh-CN.md)
 
-## 已编码并通过编译
+## Status
 
-- 战略层“修改器”按钮：复仇者号基地 / 战略地图界面打开。
-- 资源：补给、情报、外星合金、超铀水晶、超铀核心、XCOM 共享 AP。
-- 自定义非负整数总数与 +10 / +50 / +100 / +500 / +1000；溢出和非法输入拒绝提交。
-- +1 工程师、+1 科学家，使用原版人员创建、身份外观和 HQ roster 流程。
-- 治疗所有符合条件的士兵，使用原版治疗完成 order，同步治疗项目及正常关联状态。
-- 士兵生成、军营编辑器、职业与军衔、属性、晋升与恢复（已晋升士兵的强制转职与降级因 AP / 持久能力同步风险保持禁用）。
-- 战术面板：12 个默认关闭的开关（全队/指定士兵无敌、无限行动、无限移动、射击后保留行动、无限弹药、无需装填、无冷却、无限充能、命中、暴击、一击必杀），以及回血、行动点、装填、技能冷却重置。
-- 任务控制：真实目标记录与本地化 HUD 目标并排浏览、手动完成选中或全部未完成记录、胜利/失败结算、跳过 AI 回合、AI 卡死修复与恢复、重启任务。
-- 修改确认框显示原值 → 新值；确认时再次核对原值，防止使用陈旧状态。
-- INT 英文、CHS 简中及游戏实际使用的 CHN 简中本地化，UTF-16 LE BOM。
-- 操作日志带有 `[WOTCTrainer]`；没有控制台命令、游戏类覆盖或 Highlander 依赖。
+Version **0.9.0-beta**. The source compiles against the official War of the Chosen SDK with
+**0 errors and 0 warnings from this mod** — the 8 warnings the compiler reports come from the SDK's
+own DLC content.
 
-界面保留八个标签页，资源、人员、士兵、战术页可用，任务与危险功能通过战术面板内的入口打开。同种子重启与强制撤离明确禁用并标注原因，传送与复活同样保持禁用。
+**This build has not been played through yet.** Compiling is not the same as working. Everything
+below describes what the code is built to do; the in-game checks are still pending. Back up your
+saves before you use it on a campaign you care about.
 
-## 安装与测试
+## Requirements
 
-安装步骤见 [安装与实机测试](docs/INSTALL-AND-TEST.zh-CN.md)；该文档的安装流程仍然适用，但其中“可用页面”的功能清单停留在 Phase 1，集中实机验证前会一并更新。
+- **XCOM 2: War of the Chosen**, Steam, Windows. The base game on its own will not work
+  (`RequiresXPACK=true`).
+- The mod ships English (INT) and Simplified Chinese (CHN and CHS) text; the in-game language
+  follows your game's language setting.
+- No `-allowconsole` flag, no Community Highlander, no other framework or dependency.
 
-已打包的安装件仍是最早的 **outputs/Phase1/WOTCTrainerPanel** / **WOTCTrainerPanel-Phase1.zip**。Phase 1–4 的最新编译产物在工作区隔离 SDK 的 `XComGame/Mods/WOTCTrainerPanel` 暂存目录中，尚未重新打包；这个源码仓库根目录自身没有 Script 包，不要把源码目录误当成安装目录。
+## Installation
 
-编译器最终结果：**0 错误，8 个 SDK 原版 DLC 内容警告，修改器自身 0 警告**。这些警告涉及最小 SDK 缺少的原版资源；打包不包含 Core.u / Engine.u / XComGame.u 等重编的游戏包。完整记录见 [构建哈希](evidence/latest-build.json)。
+1. Extract `WOTCTrainerPanel-v0.9.0-beta.zip` anywhere **outside** the game directory.
+2. Add the extracted `WOTCTrainerPanel-v0.9.0-beta` folder as a mod directory in your launcher — it
+   contains `WOTCTrainerPanel\WOTCTrainerPanel.XComMod`. In AML: Settings → **Mod Directories**, then
+   File → **Search for new mods**. Other launchers have their own equivalent.
+4. Enable **WOTC Trainer Panel** — one copy only — and launch **XCOM 2: War of the Chosen**.
 
-## 开发约束与当前验证边界
+Step-by-step installation, the exact button positions and the full test checklist are in
+[docs/INSTALL-AND-TEST.zh-CN.md](docs/INSTALL-AND-TEST.zh-CN.md) (Chinese).
 
-所有运行时修改均走游戏的 GameState 提交或 HeadquartersOrder 提交。没有改动 Steam 安装文件、游戏配置、启动参数或存档。
+## Where the panel is
 
-用户后续允许“有把握的功能先开发全部 Phase，再统一验证”。这放宽了原先逐阶段实机验证的开发门槛，但不代表未审核的 API 或危险实验功能可以直接实现。当前 Phase 1–4 达到可编译交付状态，Phase 5–6 保留为待开发；没有宣称全项目完成，也没有宣称任何功能已通过实机验证。
+Both entry buttons read **Trainer Panel** (「修改器」 in Chinese) and sit in the top-right corner of
+their screen.
 
-正常治疗完成流程可能把士兵意志提升到 Ready 下限并恢复暂停的灵能训练，这是已核对的原版行为，界面会说明。它不是单独的“恢复全部意志 / 去除所有疲劳”功能。无合法治疗项目的异常单位不在本版修复范围内。
+| Layer | Appears on | Opens when |
+| --- | --- | --- |
+| Strategy | Avenger HUD | the top screen is the base facility grid or the strategy map |
+| Tactical | tactical HUD | `UITacticalHUD` is up and the tactical GameState is ready |
 
-尚未证明：实际按钮位置、中文字体显示、不同分辨率布局、运行时 API 兼容、各操作效果、保存/读取、与其他 Mod 的兼容性。需按 [Phase 1](docs/PHASE-1.md)、[Phase 2](docs/PHASE-2.md)、[Phase 3](docs/PHASE-3.md)、[Phase 4](docs/PHASE-4.md) 的清单收集游戏证据。
+The strategy panel pauses the geoscape while it is open. `Close`, Esc or gamepad B goes back a level.
 
-## 构建
+## Features
 
-原版 SDK 路径：`D:\steam\steamapps\common\XCOM 2 War of the Chosen SDK`。
-本轮使用工作区 `work/sdk-clean` 中的隔离副本，从原版源码构建依赖包；没有修改 Steam SDK。
+The strategy panel has 8 tabs — Resources, Personnel, Soldiers, Strategy, Items, Tactical, Mission,
+Dangerous. The Tactical and Mission tabs are disabled there on purpose: those two panels are opened
+from the button inside a mission instead.
 
-在仓库根目录执行：
+- **Resources** — supplies, intel, alien alloys, elerium crystals, elerium cores and XCOM ability
+  points, each with `+10 / +50 / +100 / +500 / +1000` or a custom total.
+- **Personnel** — +1 engineer and +1 scientist, through the vanilla personnel creation path.
+- **Soldiers** — heal every eligible soldier through the vanilla heal order, plus a barracks soldier
+  editor: per soldier, 9 fields (HP, aim, mobility, will, hacking, dodge, defence, personal AP, XP)
+  with `+1 / +5 / +10 / -1 / -5 / -10`, a template-default reset for the first seven, and a custom
+  value for AP and XP.
+- **Strategy** — Avatar project progress (`-1 / -2 / -5 / clear`), Avenger power, resistance contact
+  capacity, instant completion of research, the proving ground, facility construction and covert
+  actions, refunding a build cost, and squad recovery (heal everyone, restore will / clear fatigue).
+- **Items** — search by display name or internal name, cycle categories, show or hide story items,
+  12 rows per page, and grant a quantity (`+1 / +5 / +10 / +50 / +100 / +500` or a custom amount).
+- **Dangerous** — spawn soldiers by class, rank and count (1–20), promote them step by step, and
+  pick a rookie's promotion class.
+- **Tactical** — 12 toggles (squad invulnerable, selected soldier invulnerable, infinite actions,
+  infinite movement, keeping actions after a shot, infinite ammo, no reload, no cooldowns, infinite
+  ability and item charges, 100% hit, 100% crit, one-shot kills), a readout of the current unit, and
+  5 actions: restore health, +1 action point, +1 movement action point, reload the primary weapon,
+  reset ability cooldowns.
+- **Mission** — the mission's internal objective records next to the localized objectives the HUD
+  shows, completing the selected record or all outstanding ones, finishing the mission as a win or a
+  loss, skipping the current AI turn, disabling and re-enabling AI planning when the AI stalls, and
+  restarting the current mission through the vanilla flow.
+
+Every write is logged to `Launch.log` with a `[WOTCTrainer]` prefix in an `old value → new value`
+form, and the confirmation dialog shows the same pair. Operations that make the game jump to another
+screen close the panel first, then let the vanilla flow run.
+
+## Disabled by design
+
+These are off, and the panel says so on screen. They are not missing polish — they could not be made
+provably safe, so they were not shipped as switches:
+
+- **Demotion, and forced class changes for promoted soldiers** — the WOTC ability-point and
+  persistent-ability state cannot be kept consistent across it.
+- **Reviving a dead soldier** — a revival that cannot guarantee that roster state, tactical unit
+  state, inventory and mission state all agree would be a fake revival.
+- **Teleport** — not implemented in this version.
+- **Same-seed mission restart** — the restart uses the vanilla flow; an identical random seed is not
+  guaranteed.
+- **Forced squad evac** throughout, and **restarting** during Ironman or the tutorial.
+
+## Risks
+
+- **Back up your saves.** The panel writes into your campaign. The writes go through the game's own
+  submission APIs and the original value is re-checked before a change is committed, but a trainer is
+  still a trainer.
+- **Not verified in game yet.** Button placement, Chinese font rendering, layout at other
+  resolutions and UI scales, save/load behaviour, runtime API compatibility and compatibility with
+  other mods are all unproven.
+- **One copy only.** Do not enable two instances of this mod.
+- The mod never touches `XCom2.exe`, Steam files, game configuration, launch options or save
+  binaries; uninstalling is unchecking the mod and deleting the folder.
+
+## Known limitations
+
+- War of the Chosen only. The base game is not supported.
+- The HUD's localized objective list and the mission's internal objective records are **not** a
+  one-to-one mapping in the game's data. The panel shows both side by side so you can match them up
+  yourself, and never infers one from the other.
+- The trainer buttons are placed at fixed offsets from the screen edge and have not been checked at
+  other UI scales or resolutions.
+- English and Simplified Chinese only.
+- Not published on the Steam Workshop; install it as a local mod directory.
+
+## Feedback
+
+Please use the **Issues** tab of this repository. For a bug report include:
+
+- the acceptance item you were following, if any,
+- what you did, what you expected, and what actually happened,
+- any before/after numbers the panel or the log showed,
+- a screenshot for anything visual or layout related,
+- your `Launch.log`
+  (`%USERPROFILE%\Documents\My Games\XCOM2 War of the Chosen\XComGame\Logs\Launch.log`),
+- the other mods you had enabled.
+
+## Building from source
+
+You need the official **XCOM 2: War of the Chosen Development Tools** SDK from Steam and PowerShell.
 
 ```powershell
-.\tools\Build-Localization.ps1
-.\tools\Build.ps1 -SdkRuntime '本任务 work 目录下的隔离 SDK 副本'
+.\tools\Build-Localization.ps1                                   # regenerate INT / CHN / CHS
+.\tools\Audit-Localization.ps1                                   # read-only gate, exits non-zero on failure
+.\tools\Build.ps1        -SdkRuntime '<isolated copy of the SDK>'
+.\tools\Package.ps1      -SdkRuntime '<isolated copy of the SDK>'
 ```
 
-SDK 副本首次准备时不复制 SDK 自带的 `.u` 文件，以避免首次构建删除预编译依赖包时失败。保留原版源码和运行库；编译器会在副本中生成依赖。构建脚本拒绝把 Steam SDK 本体作为写入目录。
-
-来源与语义证据见 [API 审核](docs/API-AUDIT.md)、[Phase 1 源码哈希](evidence/phase1-source-hashes.json) 与 [Phase 4 SDK 源码哈希](evidence/phase4-source-hashes.json)。原始需求完整保留在 [REQUEST.zh-CN.txt](docs/REQUEST.zh-CN.txt)。Git 按基础工程、资源、人员治疗、UI、战术、任务控制分模块提交。
+`Build.ps1` and `Package.ps1` refuse to write into the Steam SDK itself — point them at a copy.
+`Audit-Localization.ps1` only reads the repository: it checks key coverage, per-language
+completeness, encoding, undeclared references and hardcoded user-visible labels.

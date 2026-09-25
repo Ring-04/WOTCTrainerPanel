@@ -1,13 +1,14 @@
-# 0.5.3-test 安装与实机测试（Phase 1–5 + UI 生命周期与输入修复）
+# 0.9.0-beta 安装与实机测试（Phase 1–5 + UI 生命周期与输入修复）
 
-本文件对应安装包 `WOTCTrainerPanel-0.5.3-test`。
+本文件对应安装包 `WOTCTrainerPanel-v0.9.0-beta`。
 
 **当前状态：**
 - 0.5.0-test 首轮实机：**战略层**已测项目全部正常（中文 UI、战略层「修改器」入口、当时测到的各功能）；**战术层入口按钮没有出现**，战术 / 任务 / 危险功能因此都没能进入。
 - 0.5.1-test 第二轮实机：战术层「修改器」按钮**已经可见**，但**点击无反应**；另外发现战略层「立即完成科技」跳转研究室后，修改器面板有概率**残留且无法关闭**。
 - 0.5.2-test 把上面两件事当作**同一组 UI 生命周期 / 输入问题**处理：战术入口按钮按原版战术 HUD 按钮的方式重建（PC 按钮样式 + 点击委托），并给全部 Trainer 面板加了统一的生命周期规则（宿主 Screen 绑定、离开宿主即自动关闭、新开面板前清理旧实例、关闭必须真正出栈）。**GameState 功能逻辑（Phase 1–5）本轮没有改动。**
 - **0.5.2-test 的修复尚未实机验证。** 本文中的“预期结果”仍然是设计意图，不是已经取得的实测结果。
-- 0.5.3-test 相对 0.5.2-test **只改了界面文案的来源**：4 处硬编码英文标签（士兵血量、士兵编号、物品等级、任务里的 `XCOM:`）改为引用已本地化键，其中新增 2 个键（`LabelID`「编号」、`LabelTier`「等级」）。**功能逻辑、数值写入、安全检查、禁用项全部没有改动**，因此 0.5.2-test 的验收清单与本文档其余内容继续有效。
+- 0.9.0-beta 相对 0.5.2-test **只改了界面文案的来源**：4 处硬编码英文标签（士兵血量、士兵编号、物品等级、任务里的 `XCOM:`）改为引用已本地化键，其中新增 2 个键（`LabelID`「编号」、`LabelTier`「等级」）。**功能逻辑、数值写入、安全检查、禁用项全部没有改动**，因此 0.5.2-test 的验收清单与本文档其余内容继续有效。
+- **版本号说明：** 0.9.0-beta 就是内部版本线 0.5.3-test 的对外编号，两者是同一份代码；`0.5.x-test` 是本项目内部的测试编号，对外发布统一用 `0.9.0-beta`。之前发过的 `0.5.2-test` 包没有变化，仍然是独立的一份。
 
 验收清单：
 - 本轮（UI 生命周期与输入）：`docs/ACCEPTANCE-0.5.2.zh-CN.md`
@@ -15,11 +16,13 @@
 
 ## 一、包内容
 
-解压 `WOTCTrainerPanel-0.5.3-test.zip` 后：
+解压 `WOTCTrainerPanel-v0.9.0-beta.zip` 后：
 
 ```text
-WOTCTrainerPanel-0.5.3-test/          <- 把这个目录当作 Mod 目录加入启动器
-├─ README.zh-CN.md                    <- 本文件
+WOTCTrainerPanel-v0.9.0-beta/          <- 把这个目录当作 Mod 目录加入启动器
+├─ README.md                          <- 英文说明
+├─ README.zh-CN.md                    <- 中文说明（本文件的摘要版）
+├─ docs/INSTALL-AND-TEST.zh-CN.md     <- 本文件
 ├─ PACKAGE.json                       <- 打包清单：文件、大小、SHA256、编译摘要
 └─ WOTCTrainerPanel/
    ├─ WOTCTrainerPanel.XComMod
@@ -38,7 +41,7 @@ WOTCTrainerPanel-0.5.3-test/          <- 把这个目录当作 Mod 目录加入�
 
 本项目不修改 Steam 文件、不改 `XCom2.exe`、不注入 DLL、不需要 `-allowconsole`，因此 Mod 目录可以留在游戏目录之外。
 
-1. 把 `WOTCTrainerPanel-0.5.3-test` 整个目录解压到游戏目录以外的位置。
+1. 把 `WOTCTrainerPanel-v0.9.0-beta` 整个目录解压到游戏目录以外的位置。
 2. 若使用 AML（Alternative Mod Launcher）：Settings → **Mod Directories** 加入上面那个目录，再 **File → Search for new mods**。上述菜单依据 AML 官方说明；用其他启动器就使用它自己的本地 Mod 目录功能。
 3. 只启用一份 **WOTC Trainer Panel**。启动 **XCOM 2: War of the Chosen**（需要 XPack，`WOTCTrainerPanel.XComMod` 中 `RequiresXPACK=true`）。
 4. 游戏语言保持简体中文即可，本 Mod 不要求切英文。
@@ -194,10 +197,10 @@ WOTCTrainerPanel-0.5.3-test/          <- 把这个目录当作 Mod 目录加入�
 
 ## 七、编译与验证状态
 
-- 官方 WOTC SDK 编译（0.5.3-test）：`Success - 0 error(s), 8 warning(s)`；其中 `WOTCTrainerPanel` 源码 **0 warning**，8 个警告来自原版 SDK 的 DLC 内容。
-- 本地化检查（0.5.3-test）：`missing = 0 / extra = 0 / 硬编码界面标签 = 0`；INT / CHN / CHS 各 258 条，键与声明顺序一致，UTF-16LE + BOM，CRLF。
+- 官方 WOTC SDK 编译（0.9.0-beta）：`Success - 0 error(s), 8 warning(s)`；其中 `WOTCTrainerPanel` 源码 **0 warning**，8 个警告来自原版 SDK 的 DLC 内容。
+- 本地化检查（0.9.0-beta）：`missing = 0 / extra = 0 / 硬编码界面标签 = 0`；INT / CHN / CHS 各 258 条，键与声明顺序一致，UTF-16LE + BOM，CRLF。
 - 界面文案变化（仅这 4 处）：`HP` → `生命`（复用士兵字段键）、`ID` → `编号`、`Tier` → `等级`、`XCOM: ` → `XCOM` + 分隔符（复用原键，INT 表现不变）。
 - 脚本包哈希：见 `PACKAGE.json`。
-- **0.5.3-test 没有启动游戏、没有做任何实机操作。编译通过不等于功能正常。** 0.5.2-test 的修复是否生效，要看战术层入口的点击链日志（`clicked` → `requested` → `opened`）和面板生命周期日志。
+- **0.9.0-beta 没有启动游戏、没有做任何实机操作。编译通过不等于功能正常。** 0.5.2-test 的修复是否生效，要看战术层入口的点击链日志（`clicked` → `requested` → `opened`）和面板生命周期日志。
 - 降级、已晋升士兵转职、复活、传送、同种子重开、强制撤离按设计保持禁用并在界面上说明原因。
 
