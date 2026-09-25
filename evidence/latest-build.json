@@ -1,5 +1,5 @@
 {
-    "Time":  "2026-09-25T19:22:41.4288968+08:00",
+    "Time":  "2026-09-25T21:27:27.1549542+08:00",
     "Compiler":  "%USERPROFILE%\\Documents\\Codex\\2026-09-24\\files-pasted-by-the-user-xcom\\work\\sdk-runtime\\Binaries\\Win64\\XComGame.com",
     "Arguments":  [
                       "make",
@@ -13,7 +13,7 @@
     "ExitCode":  0,
     "BinaryExists":  true,
     "BuildSucceeded":  true,
-    "Log":  "%USERPROFILE%\\Documents\\Codex\\2026-09-24\\files-pasted-by-the-user-xcom\\outputs\\WOTCTrainerPanel\\evidence\\build-20260925-192222.txt",
+    "Log":  "%USERPROFILE%\\Documents\\Codex\\2026-09-24\\files-pasted-by-the-user-xcom\\outputs\\WOTCTrainerPanel\\evidence\\build-20260925-212715.txt",
     "InGameVerified":  false,
     "CompilerSummary":  [
                             "Success - 0 error(s), 8 warning(s) (0 Unique Errors, 8 Unique Warnings)"
@@ -50,7 +50,7 @@
                         },
                         {
                             "Path":  "Src/WOTCTrainerPanel/Classes/UIScreenListener_WOTCTrainerTactical.uc",
-                            "SHA256":  "03039EDF999200F3B840F87F3A079D679BF3503478BDA63ED1486206A52E8A2B"
+                            "SHA256":  "9649FDCAD83CE55461163D608468BE8740218243ADA9E3F2A4F71E08DDAA9E1A"
                         },
                         {
                             "Path":  "Src/WOTCTrainerPanel/Classes/UIWOTCTrainer.uc",
@@ -90,7 +90,7 @@
                         },
                         {
                             "Path":  "Src/WOTCTrainerPanel/Classes/WOTCTrainerButton.uc",
-                            "SHA256":  "DAE68DA3707CB02941D8F823205624A98210F20FA81A136748341C71EB901950"
+                            "SHA256":  "FEDFB7DBDBFA5430F917FC2EE60D0BE9F34C193932380F1E02852225A0CDC70E"
                         },
                         {
                             "Path":  "Src/WOTCTrainerPanel/Classes/WOTCTrainerCampaign.uc",
@@ -141,5 +141,5 @@
                             "SHA256":  "378528622297B8E80E6AE9B1B4E8B8EB7426BF6CEDD3F7BC48177FB5DA0DD9EE"
                         }
                     ],
-    "BinarySHA256":  "2029FDCA2DC7791144ECB245E639E8B58B17F0406A19935C95FBA541006C8334"
+    "BinarySHA256":  "4C7CCC4DC80E5CA855C03F6CD69CCB9B0FAF35F3163461BE69D93B88C5776A04"
 }
