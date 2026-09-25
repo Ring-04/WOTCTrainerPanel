@@ -59,3 +59,22 @@
 - 审核结论和验证证据：
 
 `Export-SourceEvidence.ps1` 只帮助定位候选声明并固定文件哈希；人工/代理阅读源码后才能填写审核结论。
+
+## Phase 2 — 2026-09-25 编码前审核
+
+以下均为本机原版 SrcOrig，未使用 Highlander。哈希见 phase2-source-hashes.json。
+
+| 模块 | 已阅读的声明、实现和调用方 | 决策 |
+| --- | --- | --- |
+| 全新士兵 | DefaultRewards.CreatePersonnelUnit 565–626；CharacterPoolManager.CreateCharacter 314–466；Unit.OnCreation 3002–3088；HQ.AddToCrew 693、OnCrewMemberAdded 8018 | 使用 bIsRookie=true 获得合法身份、外观及库存，每次工厂创建唯一 Unit；绝不复制已有对象 |
+| 职业/逐级晋升 | Unit.RankUpSoldier 11549–11720、ApplySquaddieLoadout 10068、SetXPForRank 11483；HQCheat.LevelUpBarracks 3568–3628；SoldierClassTemplateManager 17–30、Template.GetMaxConfiguredRank 67；ExperienceConfig 91–149 | 从现有军衔逐级调用；同步 XP/StartingRank；高阶技能交给原版升级界面选择；检查模板支持的最大军衔 |
+| 派系士兵 | DefaultCharacters.Reaper/Skirmisher/Templar 4138–4214；Unit.GetResistanceFaction 3462；XpackRewards.Generate/GiveFactionSoldierReward 591–655；Faction.MeetXCom 141–180、GetChampionCharacterName 298 | 专用角色模板最低列兵；本版仅允许已接触派系，避免生成顺带改写战役接触和秘密行动 |
+| 士兵列表 | HQ.Crew；Unit.GetSoldierRank 701、GetSoldierClassTemplateName 706、GetFirst/Last/NickName 4536、GetCountryTemplate 5291、GetXPValue 11493；CountryTemplate.DisplayName；SoldierClassTemplate.DisplayName | 列出所有 HQ 兵营士兵；修改时再次检查 roster、存活、未被俘、未执行秘密行动，限 Active/Healing |
+| 属性 | Unit.GetBase/Max/CurrentStat 和 SetBaseMax/CurrentStat 6369–6374；HQCheat.SetSoldierStat 1697；CharacterTemplate.GetCharacterBaseStat；Unit.UpdateMentalState 12842 | 基础值 0–1000（HP/Mobility/Will 最低1）；当前值按差额调整；受伤时禁改 HP，意志恢复中禁改 Will；默认值读取角色模板并明确不含晋升加成 |
+| 意志与疲劳 | RecoverWill.SetProjectFocus 16、OnProjectCompleted 180–224；Unit.NeedsWillRecovery 5249 | 有项目调用原版完成方法，清除 HQ 项目/对象、恢复意志/精神状态、处理强化恢复退款；无项目只允许已经满意志的无操作，不伪造恢复 |
+| 负面特质 | Unit.RecoverFromAllTraits 984–1002、GetNumTraits 714、UnitTraitsChanged 原版事件；EventListenerTemplateManager.FindEventListenerTemplate | 调用前检查每个负面特质模板存在，再复制单位、调用恢复并发送相同事件 |
+| XP/AP | Unit.AddXp 11456–11481、AbilityPoints 111、AbilityPointsChange 11688 | AP 限 0–100000，XP 限原版当前晋升阈值封顶；不允许强写受保护 XP |
+| 降级/转职 | Unit.ResetSoldierRank 3797、ResetSoldierAbilities 3814；HQCheat.MakeSoldierAClass 2605–2643 | 原版调试方法没有完整处理 WOTC 已花 AP 与持久能力联动；降级、已晋升士兵转职保持禁用；新兵可选择普通职业正常晋升 |
+| UI | Phase 1 已审阅 UI primitives；Core.Object Repl/InStr/Caps 1292–1300 | 列表分页，固定大小按钮；玩家名字转义 HTML；共用确认与输入回调 |
+
+全部显式修改使用 ChangeContainer + ModifyStateObject + SubmitGameState，提交前校验预览值，提交后重读。原版项目完成函数自行提交，不外套重复提交。

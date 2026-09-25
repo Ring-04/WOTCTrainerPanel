@@ -1,12 +1,12 @@
-class UIWOTCTrainer extends UIScreen;
+class UIWOTCTrainer extends UIWOTCTrainerBase;
 
-var UIPanel Root, ResourcePage, PersonnelPage, SoldierPage;
+var UIPanel ResourcePage, PersonnelPage, SoldierPage;
 var WOTCTrainerButton TabButtons[8];
 var UIText ResourceValues[6];
-var UIText EngineerValue, ScientistValue, HealingValue, ResultText;
-var int ActiveTab, PendingResource, PendingOld, PendingNew;
-var name PendingKind;
-var bool bModalPending;
+var UIText EngineerValue, ScientistValue, HealingValue;
+var int ActiveTab, PendingResource;
+
+
 var array<StateObjectReference> PendingHealing;
 
 simulated function OnInit()
@@ -23,7 +23,7 @@ simulated function OnInit()
 	for (I = 0; I < 8; ++I)
 	{
 		TabButtons[I] = AddButton(Root, name("Tab" $ I), class'WOTCTrainerText'.default.Tabs[I], 40 + I * 162, 142, 148, I);
-		if (I > 2)
+		if (I > 2 && I != 7)
 			TabButtons[I].SetDisabled(true, class'WOTCTrainerText'.default.PendingPhase);
 	}
 	ResourcePage = Spawn(class'UIPanel', Root).InitPanel('Resources');
@@ -46,39 +46,22 @@ simulated function OnInit()
 	ScientistValue = AddText(PersonnelPage, 'Scientists', "", 0, 230, 650, 60);
 	AddButton(PersonnelPage, 'AddEngineer', class'WOTCTrainerText'.default.AddEngineer, 750, 130, 430, 300);
 	AddButton(PersonnelPage, 'AddScientist', class'WOTCTrainerText'.default.AddScientist, 750, 230, 430, 301);
+	AddButton(PersonnelPage, 'SpawnSoldier', class'WOTCTrainerText'.default.SpawnSoldier, 750, 335, 430, 500);
 	SoldierPage = Spawn(class'UIPanel', Root).InitPanel('Soldiers');
 	SoldierPage.SetPosition(40, 230);
 	AddText(SoldierPage, 'HealingHelp', class'WOTCTrainerText'.default.HealingHelp, 0, 0, 1240, 150);
 	HealingValue = AddText(SoldierPage, 'HealingCount', "", 0, 185, 680, 60);
 	AddButton(SoldierPage, 'HealAll', class'WOTCTrainerText'.default.HealAll, 750, 185, 430, 400);
+	AddButton(SoldierPage, 'SoldierEditor', class'WOTCTrainerText'.default.SoldierEditor, 750, 295, 430, 501);
 	ResultText = AddText(Root, 'Result', class'WOTCTrainerText'.default.SaveReminder, 40, 680, 1060, 85);
 	AddButton(Root, 'Close', class'WOTCTrainerText'.default.Close, 1150, 712, 190, 900);
 	SelectTab(0);
 	`log("[WOTCTrainer] Panel initialized", true, 'WOTCTrainer');
 }
 
-simulated function UIText AddText(UIPanel Parent, name ControlName, string Label, float PosX, float PosY, float W, float H, optional bool TitleFont)
-{
-	local UIText Text;
-	Text = Spawn(class'UIText', Parent);
-	Text.bIsNavigable = false;
-	Text.InitText(ControlName, Label, TitleFont);
-	Text.SetPosition(PosX, PosY);
-	Text.SetSize(W, H);
-	return Text;
-}
 
-simulated function WOTCTrainerButton AddButton(UIPanel Parent, name ControlName, string Label, float PosX, float PosY, float W, int Action, optional int Value)
-{
-	local WOTCTrainerButton Button;
-	Button = Spawn(class'WOTCTrainerButton', Parent);
-	Button.InitButton(ControlName, Label, OnAction);
-	Button.SetPosition(PosX, PosY);
-	Button.SetSize(W, 42);
-	Button.ActionID = Action;
-	Button.Payload = Value;
-	return Button;
-}
+
+
 
 simulated function SelectTab(int Index)
 {
@@ -134,6 +117,8 @@ simulated function OnAction(UIButton Sender)
 	if (Button == none)
 		return;
 	if (Button.ActionID == 900) { ClosePanel(); return; }
+	if (Button.ActionID == 7 || Button.ActionID == 500) { Movie.Stack.Push(Spawn(class'UIWOTCTrainerDanger', Movie.Pres)); return; }
+	if (Button.ActionID == 501) { Movie.Stack.Push(Spawn(class'UIWOTCTrainerSoldiers', Movie.Pres)); return; }
 	if (Button.ActionID < 8) { SelectTab(Button.ActionID); return; }
 	HQ = class'WOTCTrainerStrategy'.static.GetHQ();
 	if (HQ == none) { ShowError('Unavailable'); return; }
@@ -177,10 +162,7 @@ simulated function OnAction(UIButton Sender)
 	}
 }
 
-simulated function string ChangeText()
-{
-	return string(PendingOld) $ class'WOTCTrainerText'.default.Arrow $ string(PendingNew);
-}
+
 
 simulated function OnInputAccepted(string InputText)
 {
@@ -201,19 +183,7 @@ simulated function ConfirmResource()
 	ShowConfirmation(class'WOTCTrainerText'.default.Resources[PendingResource] $ ": " $ ChangeText(), false);
 }
 
-simulated function ShowConfirmation(string Body, bool Warning)
-{
-	local TDialogueBoxData Dialog;
-	Dialog.strTitle = class'WOTCTrainerText'.default.Confirm;
-	Dialog.strText = Warning ? Body $ "<br><br>" $ class'WOTCTrainerText'.default.SaveReminder : Body;
-	Dialog.strAccept = class'WOTCTrainerText'.default.Confirm;
-	Dialog.strCancel = class'WOTCTrainerText'.default.Cancel;
-	Dialog.eType = Warning ? eDialog_Warning : eDialog_Normal;
-	Dialog.isModal = true;
-	Dialog.fnCallback = OnConfirmed;
-	bModalPending = true;
-	Movie.Pres.UIRaiseDialog(Dialog);
-}
+
 
 simulated function OnConfirmed(name Action)
 {
@@ -253,34 +223,9 @@ simulated function OnConfirmed(name Action)
 	RefreshValues();
 }
 
-simulated function ShowError(name Code)
-{
-	ResultText.SetText(class'WOTCTrainerText'.static.ErrorText(Code));
-	`log("[WOTCTrainer] Operation rejected: " $ Code, true, 'WOTCTrainer');
-}
 
-simulated function ClosePanel()
-{
-	if (!bModalPending)
-		Movie.Stack.Pop(self);
-}
 
-simulated function bool OnUnrealCommand(int Cmd, int Arg)
-{
-	if (CheckInputIsReleaseOrDirectionRepeat(Cmd, Arg) && (Cmd == class'UIUtilities_Input'.const.FXS_KEY_ESCAPE || Cmd == class'UIUtilities_Input'.const.FXS_BUTTON_B))
-	{
-		ClosePanel();
-		return true;
-	}
-	return super.OnUnrealCommand(Cmd, Arg);
-}
 
-defaultproperties
-{
-	Package="NONE"
-	bConsumeMouseEvents=true
-	bHideOnLoseFocus=false
-	bAnimateOnInit=false
-	bAnimateOut=false
-	InputState=eInputState_Consume
-}
+
+
+

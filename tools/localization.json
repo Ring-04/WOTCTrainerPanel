@@ -4,8 +4,8 @@
     "修改器"
   ],
   "PhaseNotice": [
-    "Phase 1 preview: resources, staff and healing. Save before testing.",
-    "Phase 1 测试版：资源、人员与全员治疗。请先保存，再进行测试。"
+    "Development preview. Save before testing; in-game acceptance is pending.",
+    "开发测试版：请先保存。已编译的功能仍需实机与存读档验证。"
   ],
   "Tabs[0]": [
     "Resources",
@@ -174,5 +174,165 @@
   "InputTitle": [
     "Set a new total (0 to 2147483647)",
     "设置新总数（0 至 2147483647）"
+  ],
+  "SoldierEditor": [
+    "Barracks soldier editor",
+    "兵营士兵编辑器"
+  ],
+  "Refresh": [
+    "Refresh",
+    "刷新"
+  ],
+  "Barracks": [
+    "Barracks",
+    "兵营人数"
+  ],
+  "RestoreDefault": [
+    "Template default",
+    "模板默认值"
+  ],
+  "FullHeal": [
+    "Full heal / clear wound",
+    "完全治疗 / 清除伤势"
+  ],
+  "RestoreWill": [
+    "Restore Will / remove fatigue",
+    "恢复意志 / 解除疲劳"
+  ],
+  "RemoveTraits": [
+    "Remove negative traits",
+    "移除负面特质"
+  ],
+  "RankAndClass": [
+    "Rank / rookie class...",
+    "军衔 / 新兵职业…"
+  ],
+  "SoldierFields[0]": [
+    "HP",
+    "生命"
+  ],
+  "SoldierFields[1]": [
+    "Aim",
+    "命中"
+  ],
+  "SoldierFields[2]": [
+    "Mobility",
+    "移动"
+  ],
+  "SoldierFields[3]": [
+    "Will",
+    "意志"
+  ],
+  "SoldierFields[4]": [
+    "Hack",
+    "侵入"
+  ],
+  "SoldierFields[5]": [
+    "Dodge",
+    "闪避"
+  ],
+  "SoldierFields[6]": [
+    "Defense",
+    "防御"
+  ],
+  "SoldierFields[7]": [
+    "Personal AP",
+    "个人 AP"
+  ],
+  "SoldierFields[8]": [
+    "XP",
+    "经验 XP"
+  ],
+  "SoldierHelp": [
+    "Values are base stats. HP/Mobility/Will: 1-1000; other stats: 0-1000; AP: 0-100000. Template defaults exclude rank bonuses. Heal wounds and restore Will before changing their maximums. XP follows the game's cap; WOTC normally promotes by kills.",
+    "显示基础属性：生命/移动/意志为 1–1000，其余属性为 0–1000；AP 为 0–100000。模板默认值不包含军衔加成。修改生命/意志上限前先治疗/恢复意志。XP 遵循原版上限；WOTC 通常按击杀晋升。"
+  ],
+  "TemplateDefault": [
+    "(character template, without rank bonuses)",
+    "（角色模板，不含晋升加成）"
+  ],
+  "SpawnHelp": [
+    "Click class/rank to cycle; click quantity to enter 1-20. Rookies have no class; named classes start at Squaddie. Faction soldiers require a contacted faction. High ranks use sequential promotions; choose advanced abilities in the normal Armory.",
+    "点击职业/军衔循环选择，点击数量输入 1–20。新兵尚未分配职业；指定职业最低列兵。派系士兵要求已接触对应派系。高军衔通过原版逻辑逐级晋升，高阶技能请到原版军械库选择。"
+  ],
+  "SpawnSoldier": [
+    "Spawn soldier...",
+    "生成士兵…"
+  ],
+  "Promote": [
+    "Promote...",
+    "逐级晋升…"
+  ],
+  "Demote": [
+    "Demote (disabled)",
+    "降级（禁用）"
+  ],
+  "UnsafeDemote": [
+    "Demotion and changing an already-promoted soldier's class are disabled: the SDK debug reset does not reconcile spent WOTC AP and all persistent abilities. A rookie may choose one of the four standard classes during promotion.",
+    "降级与已晋升士兵转职已禁用：SDK 调试重置流程未完整处理 WOTC 已花费 AP 与持久能力。新兵可在晋升时选择四种普通职业。"
+  ],
+  "Revive": [
+    "Revive dead soldier (disabled)",
+    "复活阵亡士兵（禁用）"
+  ],
+  "Unsafe": [
+    "This feature is unsafe in this version and has been disabled.",
+    "该功能当前版本不安全，已禁用。"
+  ],
+  "ClassLabel": [
+    "Class",
+    "职业"
+  ],
+  "RankLabel": [
+    "Rank",
+    "军衔"
+  ],
+  "CountLabel": [
+    "Quantity",
+    "数量"
+  ],
+  "RookieClass": [
+    "Rookie promotion class:",
+    "新兵晋升职业："
+  ],
+  "SelectSoldierFirst": [
+    "Open a soldier in the soldier editor, then choose Rank / rookie class.",
+    "请先在士兵编辑器选择士兵，再点击“军衔 / 新兵职业”。"
+  ],
+  "CountInput": [
+    "Number of soldiers (1-20)",
+    "生成数量（1–20）"
+  ],
+  "Bounds": [
+    "The value is outside this control's permitted range.",
+    "数值超出该控件允许范围，请检查说明。"
+  ],
+  "Unsupported": [
+    "The current game templates do not support this operation safely.",
+    "当前游戏模板不支持安全执行此操作。"
+  ],
+  "FactionLocked": [
+    "Contact this resistance faction before adding its soldiers.",
+    "请先在战役中接触对应抵抗派系，再添加该派系士兵。"
+  ],
+  "UnitUnavailable": [
+    "Read only: select a living, uncaptured HQ soldier who is Active or Healing and not on a covert action.",
+    "只读：仅可修改兵营中存活、未被俘、处于待命或治疗中且未执行秘密行动的士兵。"
+  ],
+  "HealFirst": [
+    "Complete this soldier's normal healing project before editing maximum HP.",
+    "请先完成该士兵的正常治疗项目，再修改生命上限。"
+  ],
+  "WillFirst": [
+    "Restore Will first so its recovery project remains synchronized.",
+    "请先恢复意志，再修改意志上限，以保持恢复项目同步。"
+  ],
+  "XPCap": [
+    "XP exceeds the current original-game promotion cap, or this rank has no safe AddXp path. Use sequential promotion instead.",
+    "XP 超出原版当前晋升上限，或此军衔的 AddXp 路径不能安全使用。请使用逐级晋升。"
+  ],
+  "NoWillProject": [
+    "No legal Will recovery project exists for this soldier; no change was submitted.",
+    "该士兵没有合法的意志恢复项目，本次未提交修改。"
   ]
 }

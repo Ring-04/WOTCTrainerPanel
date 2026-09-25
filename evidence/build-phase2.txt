@@ -1,0 +1,51 @@
+Log: Executing Class UnrealEd.MakeCommandlet
+--------------------Core - Release--------------------
+--------------------Engine - Release--------------------
+--------------------GFxUI - Release--------------------
+--------------------AkAudio - Release--------------------
+--------------------GameFramework - Release--------------------
+--------------------UnrealEd - Release--------------------
+--------------------GFxUIEditor - Release--------------------
+--------------------IpDrv - Release--------------------
+--------------------OnlineSubsystemSteamworks - Release--------------------
+--------------------XComGame - Release--------------------
+--------------------XComEditor - Release--------------------
+--------------------XCom_DLC_Day0 - Release--------------------
+Warning, Can't find files matching %USERPROFILE%\Documents\Codex\2026-09-24\files-pasted-by-the-user-xcom\work\sdk-clean\Binaries\Win64\..\..\Development\Src\XCom_DLC_Day0\Classes\*.uc
+--------------------DLC_1 - Release--------------------
+Analyzing...
+Scripts successfully compiled - saving package '%USERPROFILE%\Documents\Codex\2026-09-24\files-pasted-by-the-user-xcom\work\sdk-clean\Binaries\Win64\..\..\XComGame\Script\DLC_1.u'
+--------------------DLC_2 - Release--------------------
+Analyzing...
+%USERPROFILE%\Documents\Codex\2026-09-24\files-pasted-by-the-user-xcom\work\sdk-clean\Development\Src\DLC_2\Classes\X2Character_DLC_Day60Characters.uc(379) : Warning, Unresolved reference to XComNarrativeMoment 'DLC_60_NarrativeMoments.DLC2_T_Neophytes_Spotted'
+%USERPROFILE%\Documents\Codex\2026-09-24\files-pasted-by-the-user-xcom\work\sdk-clean\Development\Src\DLC_2\Classes\X2Character_DLC_Day60Characters.uc(183) : Warning, Unresolved reference to XComNarrativeMoment 'DLC_60_NarrativeMoments.DLC2_T_Archon_King_Reveal'
+%USERPROFILE%\Documents\Codex\2026-09-24\files-pasted-by-the-user-xcom\work\sdk-clean\Development\Src\DLC_2\Classes\X2Character_DLC_Day60Characters.uc(87) : Warning, Unresolved reference to XComNarrativeMoment 'DLC_60_NarrativeMoments.DLC2_T_Berserker_Queen_Reveal'
+%USERPROFILE%\Documents\Codex\2026-09-24\files-pasted-by-the-user-xcom\work\sdk-clean\Development\Src\DLC_2\Classes\XComGameState_PointOfInterestAlienNest.uc(63) : Warning, Unresolved reference to StaticMesh 'Materials_DLC2.3DUI.ViperKingDen'
+%USERPROFILE%\Documents\Codex\2026-09-24\files-pasted-by-the-user-xcom\work\sdk-clean\Development\Src\DLC_2\Classes\XComGameState_PointOfInterestHunterWeapons.uc(22) : Warning, Unresolved reference to StaticMesh 'Materials_DLC2.3DUI.Skyranger_X1_POI'
+Scripts successfully compiled - saving package '%USERPROFILE%\Documents\Codex\2026-09-24\files-pasted-by-the-user-xcom\work\sdk-clean\Binaries\Win64\..\..\XComGame\Script\DLC_2.u'
+--------------------DLC_3 - Release--------------------
+Analyzing...
+%USERPROFILE%\Documents\Codex\2026-09-24\files-pasted-by-the-user-xcom\work\sdk-clean\Development\Src\DLC_3\Classes\X2Character_DLC_Day90Characters.uc(389) : Warning, Unresolved reference to XComNarrativeMoment 'DLC_90_NarrativeMoments.DLC3_T_First_Feral_Mec'
+%USERPROFILE%\Documents\Codex\2026-09-24\files-pasted-by-the-user-xcom\work\sdk-clean\Development\Src\DLC_3\Classes\XComGameState_PointOfInterestLostTowers.uc(63) : Warning, Unresolved reference to StaticMesh 'Materials_DLC3.3DUI.ShenLastGift'
+Scripts successfully compiled - saving package '%USERPROFILE%\Documents\Codex\2026-09-24\files-pasted-by-the-user-xcom\work\sdk-clean\Binaries\Win64\..\..\XComGame\Script\DLC_3.u'
+--------------------TLE - Release--------------------
+Analyzing...
+Scripts successfully compiled - saving package '%USERPROFILE%\Documents\Codex\2026-09-24\files-pasted-by-the-user-xcom\work\sdk-clean\Binaries\Win64\..\..\XComGame\Script\TLE.u'
+--------------------WOTCTrainerPanel - Release--------------------
+Analyzing...
+Scripts successfully compiled - saving package '%USERPROFILE%\Documents\Codex\2026-09-24\files-pasted-by-the-user-xcom\work\sdk-clean\Binaries\Win64\..\..\XComGame\Script\WOTCTrainerPanel.u'
+
+Warning/Error Summary
+---------------------
+Warning, Can't find files matching %USERPROFILE%\Documents\Codex\2026-09-24\files-pasted-by-the-user-xcom\work\sdk-clean\Binaries\Win64\..\..\Development\Src\XCom_DLC_Day0\Classes\*.uc
+%USERPROFILE%\Documents\Codex\2026-09-24\files-pasted-by-the-user-xcom\work\sdk-clean\Development\Src\DLC_2\Classes\X2Character_DLC_Day60Characters.uc(379) : Warning, Unresolved reference to XComNarrativeMoment 'DLC_60_NarrativeMoments.DLC2_T_Neophytes_Spotted'
+%USERPROFILE%\Documents\Codex\2026-09-24\files-pasted-by-the-user-xcom\work\sdk-clean\Development\Src\DLC_2\Classes\X2Character_DLC_Day60Characters.uc(183) : Warning, Unresolved reference to XComNarrativeMoment 'DLC_60_NarrativeMoments.DLC2_T_Archon_King_Reveal'
+%USERPROFILE%\Documents\Codex\2026-09-24\files-pasted-by-the-user-xcom\work\sdk-clean\Development\Src\DLC_2\Classes\X2Character_DLC_Day60Characters.uc(87) : Warning, Unresolved reference to XComNarrativeMoment 'DLC_60_NarrativeMoments.DLC2_T_Berserker_Queen_Reveal'
+%USERPROFILE%\Documents\Codex\2026-09-24\files-pasted-by-the-user-xcom\work\sdk-clean\Development\Src\DLC_2\Classes\XComGameState_PointOfInterestAlienNest.uc(63) : Warning, Unresolved reference to StaticMesh 'Materials_DLC2.3DUI.ViperKingDen'
+%USERPROFILE%\Documents\Codex\2026-09-24\files-pasted-by-the-user-xcom\work\sdk-clean\Development\Src\DLC_2\Classes\XComGameState_PointOfInterestHunterWeapons.uc(22) : Warning, Unresolved reference to StaticMesh 'Materials_DLC2.3DUI.Skyranger_X1_POI'
+%USERPROFILE%\Documents\Codex\2026-09-24\files-pasted-by-the-user-xcom\work\sdk-clean\Development\Src\DLC_3\Classes\X2Character_DLC_Day90Characters.uc(389) : Warning, Unresolved reference to XComNarrativeMoment 'DLC_90_NarrativeMoments.DLC3_T_First_Feral_Mec'
+%USERPROFILE%\Documents\Codex\2026-09-24\files-pasted-by-the-user-xcom\work\sdk-clean\Development\Src\DLC_3\Classes\XComGameState_PointOfInterestLostTowers.uc(63) : Warning, Unresolved reference to StaticMesh 'Materials_DLC3.3DUI.ShenLastGift'
+
+Success - 0 error(s), 8 warning(s) (0 Unique Errors, 8 Unique Warnings)
+
+Execution of commandlet took:  10.11 seconds

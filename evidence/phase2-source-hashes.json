@@ -1,0 +1,54 @@
+[
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\XComGameState_Unit.uc",
+    "SHA256": "8EB47A4EC44F297C961B8F3D207B18B8C25FE2B45D51D915BC7648731B91EDD2"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\X2StrategyElement_DefaultRewards.uc",
+    "SHA256": "E5E78C459E526EB35059C2A67D46B431C2155630A488ECCE0D47E7F2BDDF22FF"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\X2StrategyElement_XpackRewards.uc",
+    "SHA256": "BB100B68C136A9C20AC482C223E23853CE13958851D6468693DFB1E818644C2A"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\CharacterPoolManager.uc",
+    "SHA256": "9BB98410A9E75594B6BAD7FD1FC4CA601B603EC69044B1D6A376FB7BAC42051C"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\XComGameState_HeadquartersXCom.uc",
+    "SHA256": "B4B4C270D1D44741786838C4D2D048656F03ED3EE3881E267A2C054ED819CDCA"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\XComGameState_HeadquartersProjectRecoverWill.uc",
+    "SHA256": "FB494CC3DACAEF7096D453491FF4A0516025DD9E0E7004301BCF211B233EFCE3"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\XComGameState_ResistanceFaction.uc",
+    "SHA256": "280F98613B9D3CBEEAA27DA6C9E5F0F41A43E68A66524795C919B8C842315EAD"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\X2Character_DefaultCharacters.uc",
+    "SHA256": "FB0445BA1B10D29C856617DBF173CC023E3543A81C541BAD8D7D16F976E43140"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\XComHeadquartersCheatManager.uc",
+    "SHA256": "192A843F8B14D2C1A80E6E7E8CF9ADB8E3D7461CD3161F47037297A60E59AC79"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\X2ExperienceConfig.uc",
+    "SHA256": "A3B3EA0D5E508A6FA431E1DCADA455B4791058B2547E6C92CD01160860DCC27D"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\X2SoldierClassTemplateManager.uc",
+    "SHA256": "9602CF0E869BF60293FF008964BDB825D8A97D3C6C34F31822261FEBEC915669"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\X2SoldierClassTemplate.uc",
+    "SHA256": "4634924050BD3B9FF298A108308F81E2AAD57307606A3F1951612D7C5427B3E9"
+  },
+  {
+    "File": "D:\\steam\\steamapps\\common\\XCOM 2 War of the Chosen SDK\\Development\\SrcOrig\\XComGame\\Classes\\X2CountryTemplate.uc",
+    "SHA256": "94E16099B594435A35B6CAB0C561899CA247D5A3A4D6E356AAC3A62A81091AEE"
+  }
+]
