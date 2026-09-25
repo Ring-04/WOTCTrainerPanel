@@ -112,9 +112,9 @@ simulated function OnAction(UIButton Sender)
 	if (Unit == none) { ShowError('UnitUnavailable'); return; }
 	if (Button.ActionID == 403)
 	{
-		Danger = Spawn(class'UIWOTCTrainerDanger', Movie.Pres);
-		Danger.SelectedID = SelectedID;
-		Movie.Stack.Push(Danger); return;
+		Danger = UIWOTCTrainerDanger(OpenPage(class'UIWOTCTrainerDanger'));
+		if (Danger != none) Danger.SelectedID = SelectedID;
+		return;
 	}
 	PendingID = SelectedID;
 	PendingKind = 'Value';

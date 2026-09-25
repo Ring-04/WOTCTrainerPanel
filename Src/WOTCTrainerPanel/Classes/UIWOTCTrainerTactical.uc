@@ -56,8 +56,8 @@ simulated function OnAction(UIButton Sender)
 	Button = WOTCTrainerButton(Sender);
 	if (Button == none) return;
 	if (Button.ActionID == 900) { ClosePanel(); return; }
-	if (Button.ActionID == 806) { Movie.Stack.Push(Spawn(class'UIWOTCTrainerMission', Movie.Pres)); return; }
-	if (Button.ActionID == 807) { Movie.Stack.Push(Spawn(class'UIWOTCTrainerMissionDanger', Movie.Pres)); return; }
+	if (Button.ActionID == 806) { OpenPage(class'UIWOTCTrainerMission'); return; }
+	if (Button.ActionID == 807) { OpenPage(class'UIWOTCTrainerMissionDanger'); return; }
 	if (!class'WOTCTrainerTactical'.static.CanEdit()) { ShowError('TacticalUnavailable'); return; }
 	RefreshValues(); PendingID = SelectedID;
 	if (Button.ActionID >= 0 && Button.ActionID < 12)

@@ -164,9 +164,18 @@ simulated function OnAction(UIButton Sender)
 			class'WOTCTrainerText'.default.CampaignWillAll, class'WOTCTrainerText'.default.CampaignWillHelp);
 }
 
+simulated function string TransitionName(name Kind)
+{
+	if (Kind == 'Research') return "research";
+	if (Kind == 'ProvingGround') return "proving ground";
+	if (Kind == 'Facility') return "facility";
+	if (Kind == 'Covert') return "covert action";
+	return string(Kind);
+}
+
 simulated function OnConfirmed(name Action)
 {
-	local bool Success;
+	local bool Success, bTransition;
 	local name ErrorCode;
 	local string Label;
 	local int Count;
@@ -176,7 +185,24 @@ simulated function OnConfirmed(name Action)
 	if (PendingKind == 'Avatar' || PendingKind == 'Power' || PendingKind == 'Contacts')
 		Success = RunDirect(Label, Count, ErrorCode);
 	else
+	{
+		// Completing queued work hands control back to the vanilla flow, which opens its own
+		// screen (research completion jumps to the lab). The panel closes first: a trainer left
+		// under that screen would stay visible and unclickable under its mouse guard.
+		bTransition = PendingKind == 'Research' || PendingKind == 'ProvingGround'
+			|| PendingKind == 'Facility' || PendingKind == 'Covert';
+		if (bTransition)
+			CloseForVanillaTransition(string(PendingKind));
 		Success = RunQueue(Label, Count, ErrorCode);
+	}
+	if (bTransition)
+	{
+		// The panel is gone, so the outcome only goes to the log.
+		`log("[WOTCTrainer] Completing " $ TransitionName(PendingKind) $ " after panel close: "
+			$ (Success ? "ok" : ("rejected " $ string(ErrorCode))), true, 'WOTCTrainer');
+		PendingKind = '';
+		return;
+	}
 	if (Success)
 		ResultText.SetText(class'WOTCTrainerText'.default.Applied @ Label);
 	else

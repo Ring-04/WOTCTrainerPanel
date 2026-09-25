@@ -62,6 +62,40 @@ simulated function WatchEntryFlash()
 	}
 }
 
+// Click chain of the tactical entry button, so a log shows exactly how far a click gets:
+// mouse enter/leave is the flash hit test, pressed/clicked is the UIButton state machine.
+simulated function OnMouseEvent(int cmd, array<string> args)
+{
+	if (bIsTacticalEntry)
+	{
+		switch (cmd)
+		{
+		case class'UIUtilities_Input'.const.FXS_L_MOUSE_IN:
+		case class'UIUtilities_Input'.const.FXS_L_MOUSE_OVER:
+		case class'UIUtilities_Input'.const.FXS_L_MOUSE_DRAG_OVER:
+			`log("[WOTCTrainer] Tactical button mouse enter", true, 'WOTCTrainer');
+			break;
+		case class'UIUtilities_Input'.const.FXS_L_MOUSE_OUT:
+		case class'UIUtilities_Input'.const.FXS_L_MOUSE_DRAG_OUT:
+		case class'UIUtilities_Input'.const.FXS_L_MOUSE_RELEASE_OUTSIDE:
+			`log("[WOTCTrainer] Tactical button mouse leave", true, 'WOTCTrainer');
+			break;
+		case class'UIUtilities_Input'.const.FXS_L_MOUSE_DOWN:
+			`log("[WOTCTrainer] Tactical button pressed", true, 'WOTCTrainer');
+			break;
+		case class'UIUtilities_Input'.const.FXS_L_MOUSE_UP:
+		case class'UIUtilities_Input'.const.FXS_L_MOUSE_UP_DELAYED:
+		case class'UIUtilities_Input'.const.FXS_L_MOUSE_DOUBLE_UP:
+			`log("[WOTCTrainer] Tactical button clicked: inited=" $ (bIsInited ? "yes" : "no")
+				$ " enabled=" $ (IsDisabled ? "no" : "yes")
+				$ " visible=" $ (bIsVisible ? "yes" : "no")
+				$ " delegate=" $ (OnClickedDelegate != none ? "set" : "none"), true, 'WOTCTrainer');
+			break;
+		}
+	}
+	super.OnMouseEvent(cmd, args);
+}
+
 // UIPanel setters only push to flash when their mirrored value changes, so reset the
 // mirrors first: this forces the full state to flash again after a late or repeated
 // flash init.

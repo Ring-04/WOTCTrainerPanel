@@ -56,17 +56,38 @@ simulated function OnAction(UIButton Sender)
 simulated function OnConfirmed(name Action)
 {
 	local name ErrorCode;
-	local bool Success;
+	local bool Success, bTransition;
 	local XComGameState_BattleData Battle;
 	bModalPending = false;
 	if (Action != 'eUIAction_Accept') { PendingKind = ''; return; }
 	Battle = class'WOTCTrainerMission'.static.BattleData();
 	if (Battle == none || Battle.ObjectID != PendingBattle) { ShowError('Stale'); return; }
+	// These three hand control back to the vanilla mission flow, which pushes its own screens
+	// (after action report, mission summary). The trainer closes first, like the strategy queue
+	// completions: a panel left under those screens stays visible but unclickable. A rejected
+	// request is caught before that, so it cannot cost the user the panel.
+	bTransition = PendingKind == 'All' || PendingKind == 'Victory' || PendingKind == 'Failure';
+	if (bTransition && (PendingKind == 'Victory' || PendingKind == 'Failure')
+		&& !class'WOTCTrainerMission'.static.CanEnd(PendingKind == 'Victory', ErrorCode))
+	{
+		ShowError(ErrorCode);
+		PendingKind = '';
+		RefreshValues();
+		return;
+	}
+	if (bTransition)
+		CloseForVanillaTransition("mission " $ string(PendingKind));
 	if (PendingKind == 'All') Success = class'WOTCTrainerMission'.static.Complete(PendingObjectives, PendingBattle, ErrorCode);
 	else if (PendingKind == 'Victory' || PendingKind == 'Failure')
-	{
 		Success = class'WOTCTrainerMission'.static.EndMission(PendingKind == 'Victory', ErrorCode);
-		if (Success) { ClosePanel(); return; }
+	else ErrorCode = 'Unavailable';
+	if (bTransition)
+	{
+		// The panel is gone, so the outcome only goes to the log.
+		`log("[WOTCTrainer] Completing mission " $ string(PendingKind) $ " after panel close: "
+			$ (Success ? "ok" : ("rejected " $ string(ErrorCode))), true, 'WOTCTrainer');
+		PendingKind = '';
+		return;
 	}
 	if (Success) ResultText.SetText(class'WOTCTrainerText'.default.Applied @ ChangeText());
 	else ShowError(ErrorCode);

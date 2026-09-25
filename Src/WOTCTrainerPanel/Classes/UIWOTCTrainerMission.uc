@@ -88,7 +88,6 @@ simulated function OnAction(UIButton Sender)
 	local XComGameState_BattleData Battle;
 	local XComGameState_Player Player;
 	local UITacticalHUD HUD;
-	local UIWOTCTrainerMissionDanger Danger;
 	if (bModalPending) return;
 	Button = WOTCTrainerButton(Sender); if (Button == none) return;
 	if (Button.ActionID == 900) { ClosePanel(); return; }
@@ -123,7 +122,7 @@ simulated function OnAction(UIButton Sender)
 	}
 	else if (Button.ActionID == 95)
 	{
-		Danger = Spawn(class'UIWOTCTrainerMissionDanger', Movie.Pres); Movie.Stack.Push(Danger);
+		OpenPage(class'UIWOTCTrainerMissionDanger');
 	}
 	else if (Button.ActionID == 96 || Button.ActionID == 97)
 	{
@@ -153,6 +152,9 @@ simulated function OnConfirmed(name Action)
 	else if (PendingKind == 'Restart')
 	{
 		if (!class'WOTCTrainerTactical'.static.CanEdit() || Battle.m_bIsTutorial || Battle.m_bIsIronman) { ShowError('Unsupported'); return; }
+		// RestartLevel reloads the level and raises no screen signal at all, so the trainer has to be
+		// removed here: a panel left in the stack would survive as a stale instance in the new mission.
+		CloseForVanillaTransition("mission restart");
 		`log("[WOTCTrainer] Mission: current progress -> restart requested", true, 'WOTCTrainer');
 		if (`PRES.m_kNarrative != none) `PRES.m_kNarrative.RestoreNarrativeCounters();
 		PC.RestartLevel(); return;

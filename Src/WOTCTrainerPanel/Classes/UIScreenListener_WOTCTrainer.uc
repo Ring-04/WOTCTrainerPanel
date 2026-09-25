@@ -25,14 +25,18 @@ event OnReceiveFocus(UIScreen Screen)
 function OnOpen(UIButton Button)
 {
 	local UIScreen Top;
-	if (class'WOTCTrainerStrategy'.static.GetHQ() == none || `SCREENSTACK.IsInStack(class'UIWOTCTrainer'))
+	if (class'WOTCTrainerStrategy'.static.GetHQ() == none)
 		return;
 	Top = `SCREENSTACK.GetCurrentScreen();
 	// The persistent Avenger HUD is also present behind other modal screens.
 	if (UIFacilityGrid(Top) == none && UIStrategyMap(Top) == none)
 		return;
+	// A new trainer always starts from a clean stack: anything left over from an earlier screen is
+	// removed first, so two panels of the family can never be alive at the same time.
+	class'UIWOTCTrainerBase'.static.RemoveTrainers(`SCREENSTACK, "reopening strategy trainer");
 	`GAME.GetGeoscape().Pause();
-	`SCREENSTACK.Push(Button.Spawn(class'UIWOTCTrainer', `HQPRES));
+	`SCREENSTACK.Push(Button.Spawn(class'UIWOTCTrainer', `HQPRES), Button.Movie);
+	`log("[WOTCTrainer] Strategy panel opened on " $ (Button.Screen != none ? string(Button.Screen.Class.Name) : "no host screen"), true, 'WOTCTrainer');
 }
 
 defaultproperties

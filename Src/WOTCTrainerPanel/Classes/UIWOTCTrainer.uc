@@ -117,10 +117,10 @@ simulated function OnAction(UIButton Sender)
 	if (Button == none)
 		return;
 	if (Button.ActionID == 900) { ClosePanel(); return; }
-	if (Button.ActionID == 3) { Movie.Stack.Push(Spawn(class'UIWOTCTrainerCampaign', Movie.Pres)); return; }
-	if (Button.ActionID == 4) { Movie.Stack.Push(Spawn(class'UIWOTCTrainerItems', Movie.Pres)); return; }
-	if (Button.ActionID == 7 || Button.ActionID == 500) { Movie.Stack.Push(Spawn(class'UIWOTCTrainerDanger', Movie.Pres)); return; }
-	if (Button.ActionID == 501) { Movie.Stack.Push(Spawn(class'UIWOTCTrainerSoldiers', Movie.Pres)); return; }
+	if (Button.ActionID == 3) { OpenPage(class'UIWOTCTrainerCampaign'); return; }
+	if (Button.ActionID == 4) { OpenPage(class'UIWOTCTrainerItems'); return; }
+	if (Button.ActionID == 7 || Button.ActionID == 500) { OpenPage(class'UIWOTCTrainerDanger'); return; }
+	if (Button.ActionID == 501) { OpenPage(class'UIWOTCTrainerSoldiers'); return; }
 	if (Button.ActionID < 8) { SelectTab(Button.ActionID); return; }
 	HQ = class'WOTCTrainerStrategy'.static.GetHQ();
 	if (HQ == none) { ShowError('Unavailable'); return; }
