@@ -52,6 +52,15 @@ var localized string CatWeapon, CatArmor, CatUpgrade, CatAmmo, CatUtility, CatUn
 var localized string CatHeal, CatDefense, CatPsiDefense, CatPsiOffense, CatGrenade, CatTech, CatSkulljack;
 var localized string SlotUnknown, SlotArmor, SlotPrimary, SlotSecondary, SlotHeavy, SlotUtility, SlotMission, SlotBackpack;
 var localized string SlotLoot, SlotGrenade, SlotCombatSim, SlotAmmo, SlotTertiary, SlotQuaternary, SlotQuinary, SlotSenary, SlotSeptenary;
+var localized string CampaignTitle, CampaignHeaderAvatar, CampaignAvatarPermanent, CampaignAvatarFacility, CampaignAvatarPending;
+var localized string CampaignAvatarTotal, CampaignAvatarMax, CampaignMinus1, CampaignMinus2, CampaignMinus5, CampaignClear;
+var localized string CampaignAvatarHelp, CampaignAvatarFromSites, CampaignAvatarFromPermanent;
+var localized string CampaignHeaderAbility, CampaignPowerLabel, CampaignContactLabel, CampaignBonus;
+var localized string CampaignHeaderQueue, CampaignResearchLabel, CampaignProvingLabel, CampaignFacilityLabel, CampaignCovertLabel;
+var localized string CampaignResearchNow, CampaignProvingNow, CampaignFacilityNow, CampaignCovertNow, CampaignRefundNow;
+var localized string CampaignQueueHelp, CampaignCovertHelp, CampaignNoProvingGround, CampaignNothingQueued, CampaignNothingToRemove, CampaignNothingToRestore;
+var localized string CampaignCompleted, CampaignRefunded, CampaignHeaderSquad, CampaignWounded, CampaignResting;
+var localized string CampaignHealAll, CampaignWillAll, CampaignWillHelp;
 
 static function string ToggleText(bool Enabled) { return Enabled ? default.OnLabel : default.OffLabel; }
 
@@ -98,6 +107,9 @@ static function string ErrorText(name Code)
 	case 'MissingResource': return default.MissingResource;
 	case 'SubmitFailed': return default.SubmitFailed;
 	case 'VerifyFailed': return default.VerifyFailed;
+	case 'NothingQueued': return default.CampaignNothingQueued;
+	case 'NothingToRemove': return default.CampaignNothingToRemove;
+	case 'NothingToRestore': return default.CampaignNothingToRestore;
 	}
 	return default.Unavailable;
 }

@@ -23,7 +23,7 @@ simulated function OnInit()
 	for (I = 0; I < 8; ++I)
 	{
 		TabButtons[I] = AddButton(Root, name("Tab" $ I), class'WOTCTrainerText'.default.Tabs[I], 40 + I * 162, 142, 148, I);
-		if (I == 3 || I == 5 || I == 6)
+		if (I == 5 || I == 6)
 			TabButtons[I].SetDisabled(true, class'WOTCTrainerText'.default.PendingPhase);
 	}
 	ResourcePage = Spawn(class'UIPanel', Root).InitPanel('Resources');
@@ -117,6 +117,7 @@ simulated function OnAction(UIButton Sender)
 	if (Button == none)
 		return;
 	if (Button.ActionID == 900) { ClosePanel(); return; }
+	if (Button.ActionID == 3) { Movie.Stack.Push(Spawn(class'UIWOTCTrainerCampaign', Movie.Pres)); return; }
 	if (Button.ActionID == 4) { Movie.Stack.Push(Spawn(class'UIWOTCTrainerItems', Movie.Pres)); return; }
 	if (Button.ActionID == 7 || Button.ActionID == 500) { Movie.Stack.Push(Spawn(class'UIWOTCTrainerDanger', Movie.Pres)); return; }
 	if (Button.ActionID == 501) { Movie.Stack.Push(Spawn(class'UIWOTCTrainerSoldiers', Movie.Pres)); return; }
