@@ -38,8 +38,31 @@ var localized string SoldierHelp, TemplateDefault, SpawnHelp, SpawnSoldier, Prom
 var localized string ClassLabel, RankLabel, CountLabel, RookieClass, SelectSoldierFirst, CountInput;
 var localized string Bounds, Unsupported, FactionLocked, UnitUnavailable, HealFirst, WillFirst, XPCap, NoWillProject;
 var localized string TacticalToggles[12], TacticalActions[5], TacticalHelp, TacticalUnavailable, Teleport, SelectedUnit, ActionPoints, OnLabel, OffLabel;
+var localized string MissionControl, ObjectiveHelp, MissionState, Enemies, Reinforcements, InvalidTiles, PendingSubmission, NoEnemiesHint;
+var localized string RefreshObjectives, CompleteSelected, SkipAI, RestartMission, MissionLimits, InternalObjectives, HUDObjectives;
+var localized string IncompleteLabel, CompletedLabel, SkipAIHelp, RestartHelp, EndMissionHelp, CompleteAll, EndVictory, EndFailure, SameSeed, EvacSquad, ActiveMission;
+var localized string AIBusy, CompleteFirst, NoObjectives;
+var localized string RepairAI, RestoreAI, AIHangHelp, AIHangNote, AIHangScope;
+var localized string RoleTactical, RoleStrategy, RoleTriad, RoleNone, ObjectiveLoot, ObjectiveList;
+var localized string VictoryReady, VictoryBlockedBy, TurnOwner, SweepNote, SameSeedWhy, LootSweepBlocked;
+var localized string TeamXCom, TeamAlien, TeamLost, TeamResistance, TeamNeutral, TeamOne, TeamTwo, TeamOther;
 
 static function string ToggleText(bool Enabled) { return Enabled ? default.OnLabel : default.OffLabel; }
+
+static function string TeamText(ETeam Team)
+{
+	switch (Team)
+	{
+	case eTeam_XCom: return default.TeamXCom;
+	case eTeam_Alien: return default.TeamAlien;
+	case eTeam_TheLost: return default.TeamLost;
+	case eTeam_Resistance: return default.TeamResistance;
+	case eTeam_Neutral: return default.TeamNeutral;
+	case eTeam_One: return default.TeamOne;
+	case eTeam_Two: return default.TeamTwo;
+	}
+	return default.TeamOther;
+}
 
 static function string Escape(string Value)
 {
@@ -50,6 +73,9 @@ static function string ErrorText(name Code)
 {
 	switch (Code)
 	{
+	case 'AIBusy': return default.AIBusy;
+	case 'CompleteFirst': return default.CompleteFirst;
+	case 'NoObjectives': return default.NoObjectives;
 	case 'TacticalUnavailable': return default.TacticalUnavailable;
 	case 'Bounds': return default.Bounds;
 	case 'Unsupported': return default.Unsupported;

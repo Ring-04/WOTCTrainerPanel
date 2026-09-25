@@ -11,7 +11,7 @@ static function bool Available()
 static function bool CanEdit()
 {
 	local XComGameState_Player Player;
-	if (!Available() || !`TACTICALRULES.IsInState('TurnPhase_UnitActions') || `TACTICALRULES.IsDoingLatentSubmission()) return false;
+	if (!Available() || !`TACTICALRULES.IsInState('TurnPhase_UnitActions') || `TACTICALRULES.IsDoingLatentSubmission() || `TACTICALRULES.HasTacticalGameEnded()) return false;
 	Player = XComGameState_Player(`XCOMHISTORY.GetGameStateForObjectID(`TACTICALRULES.GetCachedUnitActionPlayerRef().ObjectID));
 	return Player != none && Player.GetTeam() == eTeam_XCom;
 }

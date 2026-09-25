@@ -15,7 +15,7 @@ simulated function OnInit()
 	Spawn(class'UIBGBox', Root).InitBG('Background', 0, 0, 1380, 790);
 	AddText(Root, 'Title', class'WOTCTrainerText'.default.Title @ "|" @ class'WOTCTrainerText'.default.Tabs[5], 40, 25, 1000, 50, true);
 	for (I = 0; I < 8; ++I)
-		AddButton(Root, name("Tab" $ I), class'WOTCTrainerText'.default.Tabs[I], 40 + I * 162, 100, 148, 800 + I).SetDisabled(I != 5, class'WOTCTrainerText'.default.PendingPhase);
+		AddButton(Root, name("Tab" $ I), class'WOTCTrainerText'.default.Tabs[I], 40 + I * 162, 100, 148, 800 + I).SetDisabled(I < 5, class'WOTCTrainerText'.default.PendingPhase);
 	for (I = 0; I < 12; ++I)
 		Toggles[I] = AddButton(Root, name("Toggle" $ I), "", 40 + (I / 6) * 650, 167 + (I % 6) * 49, 625, I);
 	SelectedText = AddText(Root, 'Selected', "", 40, 470, 1280, 50);
@@ -56,6 +56,8 @@ simulated function OnAction(UIButton Sender)
 	Button = WOTCTrainerButton(Sender);
 	if (Button == none) return;
 	if (Button.ActionID == 900) { ClosePanel(); return; }
+	if (Button.ActionID == 806) { Movie.Stack.Push(Spawn(class'UIWOTCTrainerMission', Movie.Pres)); return; }
+	if (Button.ActionID == 807) { Movie.Stack.Push(Spawn(class'UIWOTCTrainerMissionDanger', Movie.Pres)); return; }
 	if (!class'WOTCTrainerTactical'.static.CanEdit()) { ShowError('TacticalUnavailable'); return; }
 	RefreshValues(); PendingID = SelectedID;
 	if (Button.ActionID >= 0 && Button.ActionID < 12)

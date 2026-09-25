@@ -15,7 +15,7 @@ event OnReceiveFocus(UIScreen Screen) { OnInit(Screen); }
 
 function OnOpen(UIButton Button)
 {
-	if (!class'WOTCTrainerTactical'.static.CanEdit() || `SCREENSTACK.IsInStack(class'UIWOTCTrainerTactical')) return;
+	if (!class'WOTCTrainerTactical'.static.Available() || `SCREENSTACK.IsInStack(class'UIWOTCTrainerTactical')) return;
 	if (UITacticalHUD(`SCREENSTACK.GetCurrentScreen()) == none) return;
 	`SCREENSTACK.Push(Button.Spawn(class'UIWOTCTrainerTactical', `PRES));
 }

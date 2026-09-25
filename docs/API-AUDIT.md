@@ -91,3 +91,23 @@
 - `Item.GetClipSize` 854–890、Ammo 字段；`Ability.iCooldown/iCharges` 12/13、`X2AbilityCharges.GetInitialCharges`；填弹上限来自物品及升级件，技能充能上限来自模板，冷却逐一修改所属技能副本。
 - 手工治疗只增加存活单位当前 HP，不清除战略 LowestHP、异常状态或假复活。战术回血不等于战后无伤。
 - 命中/暴击保证仅覆盖原版 StandardAim 系列攻击；独立命中免疫、处决脚本和其他 Mod 的覆盖仍须实机测试。未审核完整合法流程的 FOW、AI、复活和传送暂不启用。
+
+## Phase 4 — 任务控制编码前审核
+
+- `XGGameData.MissionObjectiveDefinition` 302–323 只有 ObjectiveName 与三种用途/完成标志，没有本地化文本或激活标志。`ObjectiveDisplayInfo`（StrategyStructures 896）是另一组显示数据，不包含可靠的战术 ObjectiveName。故展示真实内部目标和中文 HUD 文案的独立列表，禁止按数组索引猜配对。
+- `BattleData.CompleteObjective` 274–289 更新任务数据并触发 OnMissionObjectiveComplete；`SeqAct_CompleteMissionObjective.Activated` 完整正常提交用例。Complete All 指当前任务已配置但未完成的目标，不捏造 skipped 状态。
+- `X2TacticalGameRuleset.EndBattle` 225–293 创建正常 eGameRule_TacticalGameEnd，正常 SubmitGameState 和 EndBattle 事件；`Context_TacticalGameRule.BuildTacticalGameEndGameState` 278–319；`BattleData.SetVictoriousPlayer` 833–867 仍按 MissionSource.WasMissionSuccessfulFn 决定战役成功，不能只强写胜利 UI。本版胜利结束先要求任务自身成功判定已满足。
+- `HasTacticalGameEnded` 315；BattleData.VictoriousPlayer 162；`XGBattle_SP.GetHumanPlayer/GetAIPlayer` 327–367：结束前排除已结束/多人/教程，检查玩家对象。
+- `UIPauseMenu.RestartMissionDialgoueCallback` 554–560；`XGNarrative.RestoreNarrativeCounters` 86；`XComPlayerController.RestartLevel` 1715：使用原版重开入口，不调用 CheatManager；同种子接口只见引擎作弊随机数改写，保持禁用。
+- `XGPlayer.EndTurn` 421–446；`TacticalGameRule.ContextBuildGameState` 83–99：跳过当前敌方回合使用相同 SkipTurn context / PlayerRef / SetSendGameState / SubmitGameStateContext；已有潜在提交时拒绝，不能宣称修复所有 AI hang。
+- `XComGameState_ObjectivesList.ObjectiveDisplayInfos` 19；`UIObjectiveList.RefreshObjectivesDisplay` 135；`UITacticalHUD.m_kObjectivesControl` 71；`UIScreenStack.GetScreen` 608：刷新只同步已有 HUD 数据，不把刷新当完成。
+- `AIReinforcementSpawner.Countdown/SpawnedUnitIDs`；`Unit.TileLocation` 118；`XComWorldData.IsTileOutOfRange` 773：只读诊断己方、异形、Lost、待增援与越界 Tile；不将飞行单位的非地板 Tile 误报为损坏。
+
+## Phase 4 — 编码后补充核对（2026-09-25，编译通过后）
+
+- `XGAIPlayer.uc:20` `var bool m_bSkipAI`（注释即 "For debugging/testing"），消费于 `:269` 调用 `EndTurn(ePlayerEndTurnType_AI)` 与 `:864` 的分组守卫。写入者只有两处原版代码：`SeqAct_SkipAI.uc:7`（Kismet 节点）和 `XComTacticalCheatManager.uc:2480-2483`（`exec function SkipAI`，同时设置主 AI 与 Lost 玩家）。它是可视化器上的瞬态调试开关，不属于任何 GameState、不存档。AI 卡死修复直接写这一开关，不调用 cheat manager、不走控制台。
+- `XComTacticalCheatManager.uc:3531-3536` `RestartLevelWithSameSeed` 先调 `XComCheatManager.uc:2769` 的 `native exec function SetSeedOverride`，再 `Engine.SetRandomSeeds(\`BATTLE.iLevelSeed)` 后 `RestartLevel()`。脚本侧可读的部分是 `SetRandomSeeds`，但 `SetSeedOverride` 是 native，没有可审核实现，缺它无法证明重启确实复用同一种子，因此同种子重启保持禁用，而不是近似实现。
+- `X2StrategyGameRulesetDataStructures.uc:896` `struct native ObjectiveDisplayInfo` 提供 HUD 行的 `DisplayLabel/ShowCompleted/ShowFailed` 等；本版只读访问 `DisplayLabel/ShowCompleted/ShowFailed/HideInTactical/GPObjective`。它与 `MissionObjectiveDefinition` 之间没有索引或 ObjectiveName 的可靠对应，因此两个列表并排展示，不做第 N 项配对。
+- 跨类引用类体内声明的 struct 需要在消费方加 `dependson`：`UIWOTCTrainerMission.uc(49) Unrecognized type 'MissionObjectiveEntry'` 是在 `UIWOTCTrainerMission` 声明中加入 `dependson(WOTCTrainerMission)` 后才消解的。原版同型先例是 `UIDialogueBox.uc:11` 的 `dependson(UICallbackData)`。
+- `XComGameState_BattleData.SetVictoriousPlayer` 833–867 在任务点无法解析（`MissionState == none`，含 `GetMissionSource` 790 找不到模板而返回 none）或 `WasMissionSuccessfulFn == none` 时，会落到 `bLocalPlayerWon = true`。镜像实现必须保持同样的宽松处理，否则会挡住游戏本来会记为胜利的结算。
+- `X2TacticalGameRuleset.uc:1984-2003`：只有 `AllTacticalObjectivesCompleted()` 成立才回收阵亡遗体并清扫战利品。这正是 Destroy Relay 被 Lost 摧毁后 Sweep 未结算会让玩家丢失遗体/战利品的真实原因，也是面板必须显示未完成战术目标并允许手动完成对应记录的动机。

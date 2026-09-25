@@ -430,5 +430,221 @@
   "TacticalActions[4]": [
     "Reset cooldowns",
     "重置技能冷却"
+  ],
+  "MissionControl": [
+    "Mission control / diagnostics",
+    "任务控制 / 修复诊断"
+  ],
+  "ObjectiveHelp": [
+    "Left: actual mission records (internal IDs). Right: localized HUD objectives. The SDK does not expose a reliable mapping between these lists. Completing a record does not bypass each mission's scripted conditions.",
+    "左侧为实际任务记录（内部 ID），右侧为中文 HUD 目标。SDK 没有提供两者可靠的逐项映射。完成记录不会自动绕过各任务的脚本条件。"
+  ],
+  "MissionState": [
+    "Rules state",
+    "规则状态"
+  ],
+  "Enemies": [
+    "Aliens",
+    "异形单位"
+  ],
+  "Reinforcements": [
+    "Pending reinforcement spawners",
+    "待生成增援"
+  ],
+  "InvalidTiles": [
+    "Out-of-bounds tiles",
+    "越界 Tile"
+  ],
+  "PendingSubmission": [
+    "Latent submission in progress",
+    "正在进行潜在状态提交"
+  ],
+  "NoEnemiesHint": [
+    "No living Alien/Lost units. Check unresolved Sweep objectives and pending reinforcements; this alone does not prove a mission bug.",
+    "未发现存活异形或失魂者。可检查未完成的 Sweep 目标与待增援；仅此不能判定任务故障。"
+  ],
+  "RefreshObjectives": [
+    "Refresh objective display",
+    "刷新任务目标显示"
+  ],
+  "CompleteSelected": [
+    "Complete selected record...",
+    "完成选中目标记录…"
+  ],
+  "SkipAI": [
+    "Skip current AI turn...",
+    "跳过当前 AI 回合…"
+  ],
+  "RestartMission": [
+    "Restart mission...",
+    "重开当前任务…"
+  ],
+  "MissionLimits": [
+    "AI skip cannot interrupt an in-flight state submission. Same-seed restart and forced evacuation remain disabled until an auditable API exists.",
+    "跳过 AI 无法中断正在提交的状态。同种子重开与强制全队撤离在找到可审计 API 前仍然禁用。"
+  ],
+  "InternalObjectives": [
+    "Mission records (internal IDs)",
+    "任务记录（内部 ID）"
+  ],
+  "HUDObjectives": [
+    "Localized HUD objective state",
+    "中文 HUD 目标状态"
+  ],
+  "IncompleteLabel": [
+    "Incomplete",
+    "未完成"
+  ],
+  "CompletedLabel": [
+    "Completed",
+    "已完成"
+  ],
+  "SkipAIHelp": [
+    "Current enemy player: active turn -> skip requested. Uses the normal SkipTurn state context. This may resolve some AI stalls, but not animation or latent-submission hangs.",
+    "当前敌方玩家：行动中 → 请求跳过回合。使用原版 SkipTurn 状态流程，可用于部分 AI 卡顿；无法处理动画或潜在状态提交卡死。"
+  ],
+  "RestartHelp": [
+    "Current mission progress -> original mission restart. Unsaved tactical progress is lost. Disabled for Ironman and tutorials. The same random seed is not guaranteed.",
+    "当前任务进度 → 原版重开任务。未保存的战术进度会丢失。铁人和教程中禁用；不保证随机种子相同。"
+  ],
+  "EndMissionHelp": [
+    "Completing all records may affect strategy rewards. Victory uses normal EndBattle and first requires the mission's own success conditions. It does not rescue/copy units or fake campaign success. Failure also uses the normal end-game state.",
+    "完成全部记录可能影响战役奖励。胜利结束使用原版 EndBattle，且必须先满足任务自身成功条件；不会伪造营救或战役成功。失败结束也使用正常结束状态。"
+  ],
+  "CompleteAll": [
+    "Complete all remaining records...",
+    "完成全部未完成目标记录…"
+  ],
+  "EndVictory": [
+    "End mission as victory...",
+    "按胜利结束任务…"
+  ],
+  "EndFailure": [
+    "End mission as failure...",
+    "按失败结束任务…"
+  ],
+  "SameSeed": [
+    "Restart with same seed (disabled)",
+    "同种子重开（禁用）"
+  ],
+  "EvacSquad": [
+    "Force squad evacuation (disabled)",
+    "强制全队撤离（禁用）"
+  ],
+  "ActiveMission": [
+    "Mission in progress",
+    "任务进行中"
+  ],
+  "AIBusy": [
+    "No AI-controlled UnitActions turn is currently available to skip. Wait for pending state submissions to finish.",
+    "当前没有可跳过的 AI 行动阶段。请等待状态提交完成。"
+  ],
+  "CompleteFirst": [
+    "The mission's original success conditions are not met. Inspect actual objectives, VIP/rescue and other scenario requirements first.",
+    "尚未满足任务的原版成功条件。请先检查实际任务目标、VIP/营救及其他场景要求。"
+  ],
+  "NoObjectives": [
+    "No eligible incomplete objective was selected.",
+    "未选中可完成的任务目标记录。"
+  ],
+  "RepairAI": [
+    "Disable AI planning...",
+    "禁用 AI 行动规划…"
+  ],
+  "RestoreAI": [
+    "Restore AI planning...",
+    "恢复 AI 行动规划…"
+  ],
+  "AIHangHelp": [
+    "Sets the AI players' skip flag, the same switch the original SkipAI console command and the SeqAct_SkipAI Kismet node use. A stalled AI player then finishes its turn through the engine's own end-turn path instead of being force-reset.",
+    "设置 AI 玩家的跳过标志，与原版 SkipAI 控制台命令及 SeqAct_SkipAI 关卡节点使用同一开关。停滞的 AI 玩家会通过引擎自身的结束回合流程结束回合，而不是被强制重置。"
+  ],
+  "AIHangNote": [
+    "Transient state: not saved, not part of game state. Objectives and units are not modified. Reloading the mission clears it.",
+    "仅为临时状态：不会保存，不属于 GameState。不会修改任务目标与单位。重新载入任务后复位。"
+  ],
+  "AIHangScope": [
+    "AI turn control",
+    "AI 回合控制"
+  ],
+  "RoleTactical": [
+    "tactical",
+    "战术"
+  ],
+  "RoleStrategy": [
+    "strategy",
+    "战略"
+  ],
+  "RoleTriad": [
+    "triad",
+    "三方"
+  ],
+  "RoleNone": [
+    "This mission has no tactical or strategy objectives configured.",
+    "本任务未配置战术或战略目标。"
+  ],
+  "ObjectiveLoot": [
+    "loot",
+    "战利品"
+  ],
+  "ObjectiveList": [
+    "Objectives",
+    "任务目标"
+  ],
+  "VictoryReady": [
+    "Mission success conditions are satisfied; the campaign will record a success.",
+    "任务成功条件已满足；战役将记录为成功。"
+  ],
+  "VictoryBlockedBy": [
+    "Campaign success is not satisfied yet:",
+    "战役成功条件尚未满足："
+  ],
+  "TurnOwner": [
+    "Active turn",
+    "当前行动方"
+  ],
+  "SweepNote": [
+    "Vanilla rule: mission cleanup recovers dead soldiers' bodies and sweeps loot only when every tactical objective is complete. Completing the missing objectives first restores that resolution.",
+    "原版规则：只有当所有战术目标完成后，任务结算才会回收阵亡士兵遗体并清扫战利品。先补齐缺失的目标即可恢复该结算。"
+  ],
+  "LootSweepBlocked": [
+    "Sweep not resolved: bodies and loot will NOT be recovered.",
+    "清扫未结算：阵亡遗体与战利品不会被回收。"
+  ],
+  "SameSeedWhy": [
+    "Disabled: the original RestartLevelWithSameSeed also calls XComCheatManager.SetSeedOverride, a native function with no readable implementation. Without that step a restart cannot be proven to reuse the same seed, so it is not offered.",
+    "已禁用：原版 RestartLevelWithSameSeed 还会调用 XComCheatManager.SetSeedOverride，该函数为 native 实现、无源码可核对。缺少这一步无法证明复用了同一随机种子，因此不提供该功能。"
+  ],
+  "TeamXCom": [
+    "XCOM",
+    "XCOM"
+  ],
+  "TeamAlien": [
+    "Alien",
+    "外星人"
+  ],
+  "TeamLost": [
+    "Lost",
+    "失落者"
+  ],
+  "TeamResistance": [
+    "Resistance",
+    "抵抗组织"
+  ],
+  "TeamNeutral": [
+    "Neutral",
+    "中立"
+  ],
+  "TeamOne": [
+    "Team One",
+    "阵营一"
+  ],
+  "TeamTwo": [
+    "Team Two",
+    "阵营二"
+  ],
+  "TeamOther": [
+    "Other",
+    "其他"
   ]
 }
