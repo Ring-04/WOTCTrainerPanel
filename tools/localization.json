@@ -646,5 +646,193 @@
   "TeamOther": [
     "Other",
     "其他"
+  ],
+  "ItemHelp": [
+    "Weapons, armor, ammo, upgrades and combat sims are enumerated live from the game's own item template manager, so everything the current game defines (DLC and installed mods included) appears here. Pick a row, set the amount and confirm to add it to the Avenger inventory.",
+    "武器、护甲、弹药、改装件与战斗芯片全部实时枚举自游戏自身的物品模板表，因此当前游戏定义的一切（含 DLC 与已安装的 Mod）都会出现在这里。选中一行、设定数量并确认，即可加入复仇者号仓库。"
+  ],
+  "ItemExcluded": [
+    "Not listed:",
+    "未列出："
+  ],
+  "ItemExcludedWhy": [
+    "templates that are resources, schematics, mission or story items, unlimited items, or carry no display name. Those are handled by the resource page or granted by campaign progress, so adding them here would duplicate or derail the campaign.",
+    "属于资源、图纸、任务或剧情物品、无限物品，以及没有显示名称的模板。它们由资源页处理，或由战役进度发放；从这里加入会重复发放或破坏剧情流程。"
+  ],
+  "ItemsLabel": [
+    "Items",
+    "物品"
+  ],
+  "ItemAll": [
+    "All categories",
+    "全部类别"
+  ],
+  "ItemEmpty": [
+    "Select an item to see its details.",
+    "选择一件物品以查看详情。"
+  ],
+  "QuantityLabel": [
+    "Amount",
+    "数量"
+  ],
+  "SetQuantity": [
+    "Enter amount",
+    "自定义数量"
+  ],
+  "GrantItem": [
+    "Add to inventory",
+    "加入仓库"
+  ],
+  "GrantHelp": [
+    "This uses the same inventory path as an instant item build: no cost is charged and no build time is spent. The granted template is always the one selected here; the trainer does not substitute an upgraded version. Save before testing.",
+    "此操作与原版“瞬间建造完成”使用同一条入库流程：不消耗资源，也不占用建造时间。发放的模板始终是这里选中的那一件，修改器不会替换成升级版本。测试前请先存档。"
+  ],
+  "InternalName": [
+    "Template",
+    "模板名"
+  ],
+  "CategoryLabel": [
+    "Category",
+    "类别"
+  ],
+  "SlotLabel": [
+    "Slot",
+    "槽位"
+  ],
+  "OwnedLabel": [
+    "In inventory",
+    "仓库数量"
+  ],
+  "UniqueNote": [
+    "This item is always stored as a unique object, so one copy is added per confirmation.",
+    "此物品始终以独立对象存放，因此每次确认只加入 1 件。"
+  ],
+  "NotGrantable": [
+    "The trainer does not offer this template; see the notice text.",
+    "修改器不提供此模板，请见说明文字。"
+  ],
+  "SlotUnknown": [
+    "Unknown",
+    "未知"
+  ],
+  "SlotArmor": [
+    "Armor",
+    "护甲"
+  ],
+  "SlotPrimary": [
+    "Primary weapon",
+    "主武器"
+  ],
+  "SlotSecondary": [
+    "Secondary weapon",
+    "副武器"
+  ],
+  "SlotHeavy": [
+    "Heavy weapon",
+    "重型武器"
+  ],
+  "SlotUtility": [
+    "Utility item",
+    "通用物品"
+  ],
+  "SlotMission": [
+    "Mission item",
+    "任务物品"
+  ],
+  "SlotBackpack": [
+    "Backpack",
+    "背包"
+  ],
+  "SlotLoot": [
+    "Loot",
+    "战利品"
+  ],
+  "SlotGrenade": [
+    "Grenade",
+    "榴弹"
+  ],
+  "SlotCombatSim": [
+    "Combat sim",
+    "战斗芯片"
+  ],
+  "SlotAmmo": [
+    "Ammo",
+    "弹药类型"
+  ],
+  "SlotTertiary": [
+    "Tertiary weapon",
+    "第三武器"
+  ],
+  "SlotQuaternary": [
+    "Quaternary weapon",
+    "第四武器"
+  ],
+  "SlotQuinary": [
+    "Quinary weapon",
+    "第五武器"
+  ],
+  "SlotSenary": [
+    "Senary weapon",
+    "第六武器"
+  ],
+  "SlotSeptenary": [
+    "Septenary weapon",
+    "第七武器"
+  ],
+  "CatWeapon": [
+    "Weapon",
+    "武器"
+  ],
+  "CatArmor": [
+    "Armor",
+    "护甲"
+  ],
+  "CatUpgrade": [
+    "Weapon upgrade",
+    "武器强化部件"
+  ],
+  "CatAmmo": [
+    "Ammo item",
+    "弹药物品"
+  ],
+  "CatUtility": [
+    "Utility item",
+    "通用物品"
+  ],
+  "CatUnlimited": [
+    "Unlimited",
+    "无限物品"
+  ],
+  "CatCombatSim": [
+    "Combat sim",
+    "战斗芯片"
+  ],
+  "CatHeal": [
+    "Healing item",
+    "治疗物品"
+  ],
+  "CatDefense": [
+    "Defense item",
+    "防御物品"
+  ],
+  "CatPsiDefense": [
+    "Psi shield",
+    "心灵护盾"
+  ],
+  "CatPsiOffense": [
+    "Psi offense",
+    "心灵攻击"
+  ],
+  "CatGrenade": [
+    "Grenade",
+    "榴弹"
+  ],
+  "CatTech": [
+    "Tech item",
+    "科技物品"
+  ],
+  "CatSkulljack": [
+    "Skulljack",
+    "头颅接入器"
   ]
 }

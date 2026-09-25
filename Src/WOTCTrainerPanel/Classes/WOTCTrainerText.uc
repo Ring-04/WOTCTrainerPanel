@@ -46,6 +46,12 @@ var localized string RepairAI, RestoreAI, AIHangHelp, AIHangNote, AIHangScope;
 var localized string RoleTactical, RoleStrategy, RoleTriad, RoleNone, ObjectiveLoot, ObjectiveList;
 var localized string VictoryReady, VictoryBlockedBy, TurnOwner, SweepNote, SameSeedWhy, LootSweepBlocked;
 var localized string TeamXCom, TeamAlien, TeamLost, TeamResistance, TeamNeutral, TeamOne, TeamTwo, TeamOther;
+var localized string ItemHelp, ItemExcluded, ItemExcludedWhy, ItemsLabel, ItemAll, ItemEmpty, QuantityLabel, SetQuantity;
+var localized string GrantItem, GrantHelp, InternalName, CategoryLabel, SlotLabel, OwnedLabel, UniqueNote, NotGrantable;
+var localized string CatWeapon, CatArmor, CatUpgrade, CatAmmo, CatUtility, CatUnlimited, CatCombatSim;
+var localized string CatHeal, CatDefense, CatPsiDefense, CatPsiOffense, CatGrenade, CatTech, CatSkulljack;
+var localized string SlotUnknown, SlotArmor, SlotPrimary, SlotSecondary, SlotHeavy, SlotUtility, SlotMission, SlotBackpack;
+var localized string SlotLoot, SlotGrenade, SlotCombatSim, SlotAmmo, SlotTertiary, SlotQuaternary, SlotQuinary, SlotSenary, SlotSeptenary;
 
 static function string ToggleText(bool Enabled) { return Enabled ? default.OnLabel : default.OffLabel; }
 
@@ -85,6 +91,7 @@ static function string ErrorText(name Code)
 	case 'WillFirst': return default.WillFirst;
 	case 'XPCap': return default.XPCap;
 	case 'NoWillProject': return default.NoWillProject;
+	case 'NotGrantable': return default.NotGrantable;
 	case 'NothingToHeal': return default.NothingToHeal;
 	case 'InvalidNumber': return default.InvalidNumber;
 	case 'Stale': return default.Stale;

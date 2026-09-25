@@ -1,5 +1,5 @@
 {
-    "Time":  "2026-09-25T18:30:44.5430231+08:00",
+    "Time":  "2026-09-25T18:50:32.0573417+08:00",
     "Compiler":  "%USERPROFILE%\\Documents\\Codex\\2026-09-24\\files-pasted-by-the-user-xcom\\work\\sdk-clean\\Binaries\\Win64\\XComGame.com",
     "Arguments":  [
                       "make",
@@ -13,7 +13,7 @@
     "ExitCode":  0,
     "BinaryExists":  true,
     "BuildSucceeded":  true,
-    "Log":  "%USERPROFILE%\\Documents\\Codex\\2026-09-24\\files-pasted-by-the-user-xcom\\outputs\\WOTCTrainerPanel\\evidence\\build-20260925-183034.txt",
+    "Log":  "%USERPROFILE%\\Documents\\Codex\\2026-09-24\\files-pasted-by-the-user-xcom\\outputs\\WOTCTrainerPanel\\evidence\\build-20260925-185022.txt",
     "InGameVerified":  false,
     "CompilerSummary":  [
                             "Success - 0 error(s), 8 warning(s) (0 Unique Errors, 8 Unique Warnings)"
@@ -34,15 +34,15 @@
                         },
                         {
                             "Path":  "Localization/WOTCTrainerPanel.CHN",
-                            "SHA256":  "D0650A241C6F1C17B3A5B9832516E70C31D7BCCA20AD7B469D440EDB5E95D13B"
+                            "SHA256":  "0DCD3A2AF910D623ECD486636FC3F0760F9FCB61C5E4E34FDC6BCB713DAC5F5C"
                         },
                         {
                             "Path":  "Localization/WOTCTrainerPanel.CHS",
-                            "SHA256":  "D0650A241C6F1C17B3A5B9832516E70C31D7BCCA20AD7B469D440EDB5E95D13B"
+                            "SHA256":  "0DCD3A2AF910D623ECD486636FC3F0760F9FCB61C5E4E34FDC6BCB713DAC5F5C"
                         },
                         {
                             "Path":  "Localization/WOTCTrainerPanel.INT",
-                            "SHA256":  "78F2C09ABB51886B3DBDD7803F3A0415230CC15A3B00E569056F1D1319796429"
+                            "SHA256":  "2714AA48C94613052C23B9BF4F3D3D02864F0291D569BC1E1D2EF9742EB99C8F"
                         },
                         {
                             "Path":  "Src/WOTCTrainerPanel/Classes/UIScreenListener_WOTCTrainer.uc",
@@ -54,7 +54,7 @@
                         },
                         {
                             "Path":  "Src/WOTCTrainerPanel/Classes/UIWOTCTrainer.uc",
-                            "SHA256":  "A83B8A36D9A8D8B699BDA82010536712692ADCDC182460D1D8D21433D8A795E8"
+                            "SHA256":  "FEB16CD113126A47843457909DA6B41FE073FD835D8A6BC56C8835B05B78A1B6"
                         },
                         {
                             "Path":  "Src/WOTCTrainerPanel/Classes/UIWOTCTrainerBase.uc",
@@ -63,6 +63,10 @@
                         {
                             "Path":  "Src/WOTCTrainerPanel/Classes/UIWOTCTrainerDanger.uc",
                             "SHA256":  "253BAFA8CAB31C623F6DE7E05E6DEABD8B1B9962B7A9060F2C95EDE6E5583536"
+                        },
+                        {
+                            "Path":  "Src/WOTCTrainerPanel/Classes/UIWOTCTrainerItems.uc",
+                            "SHA256":  "0E6FB27CFEBF041BEAC91CFD527773B0C780946C486A3F000273FB0262A680B9"
                         },
                         {
                             "Path":  "Src/WOTCTrainerPanel/Classes/UIWOTCTrainerMission.uc",
@@ -85,6 +89,10 @@
                             "SHA256":  "DAE68DA3707CB02941D8F823205624A98210F20FA81A136748341C71EB901950"
                         },
                         {
+                            "Path":  "Src/WOTCTrainerPanel/Classes/WOTCTrainerItems.uc",
+                            "SHA256":  "B46AB6136EEB5286EFA7019B4AA936039381C92581AC3F5612FE22159C9F259A"
+                        },
+                        {
                             "Path":  "Src/WOTCTrainerPanel/Classes/WOTCTrainerMission.uc",
                             "SHA256":  "1D1AE9AA0FF70039088837D805D66EF2C893688357A81A797436B25BA0085198"
                         },
@@ -102,7 +110,7 @@
                         },
                         {
                             "Path":  "Src/WOTCTrainerPanel/Classes/WOTCTrainerText.uc",
-                            "SHA256":  "3017A40F40F77B2E5EF32E062D3C09FE9268566B990EFE589F9FC3C3B85B41D6"
+                            "SHA256":  "E4D9BE11E95E5DE116CE7E67293248DB7CF7DAF67BC65DFBD235C87AD1BA7675"
                         },
                         {
                             "Path":  "Src/WOTCTrainerPanel/Classes/X2Ability_WOTCTrainer.uc",
@@ -125,5 +133,5 @@
                             "SHA256":  "378528622297B8E80E6AE9B1B4E8B8EB7426BF6CEDD3F7BC48177FB5DA0DD9EE"
                         }
                     ],
-    "BinarySHA256":  "6211919A5AE1D6AF35FCA9A4C88FE8DA38EE34DBA6D911B23E445969DF2876AE"
+    "BinarySHA256":  "B299AABD35FBE7F0DE25CD0DAAF0B355A1B78346EF56E225E6853D505A8C892F"
 }

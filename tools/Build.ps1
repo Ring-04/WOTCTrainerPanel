@@ -31,7 +31,7 @@ foreach ($folder in @('Config', 'Localization')) {
     if (Test-Path -LiteralPath $source) { Copy-Item -LiteralPath $source -Destination $stage -Recurse }
 }
 New-Item -ItemType Directory -Path (Join-Path $stage 'Script') -Force | Out-Null
-$metadata = "[mod]`r`npublishedFileId=0`r`nTitle=WOTC Trainer Panel`r`nDescription=Phase 1 strategy trainer`r`nRequiresXPACK=true`r`n"
+$metadata = "[mod]`r`npublishedFileId=0`r`nTitle=WOTC Trainer Panel`r`nDescription=Local trainer panel for strategy, barracks, items and mission controls`r`nRequiresXPACK=true`r`n"
 [IO.File]::WriteAllText((Join-Path $stage "$modName.XComMod"), $metadata, [Text.UTF8Encoding]::new($false))
 $binary = Join-Path $runtime "XComGame\Script\$modName.u"
 if (Test-Path -LiteralPath $binary) { Remove-Item -LiteralPath $binary -Force }
