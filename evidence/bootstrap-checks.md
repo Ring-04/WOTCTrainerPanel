@@ -15,7 +15,7 @@
 
 ## 外部阻塞证据
 
-只读检查文件：`D:\steam\logs\content_log.txt`。
+只读检查文件：`<Steam 安装目录>\logs\content_log.txt`。
 
 ```text
 [2026-09-24 20:44:58] AppID 602410 update started : download 0/977745648, store 0/0, reuse 0/0, delta 0/0, stage 0/1726735588

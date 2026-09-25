@@ -2,7 +2,7 @@
 
 **2026-09-24 更新：本机原版 WOTC SDK 已就绪，以下 Phase 1 接口已阅读声明、实现与调用方，可以编码；尚未实机验证。**
 
-源码根目录：`D:\steam\steamapps\common\XCOM 2 War of the Chosen SDK\Development\SrcOrig`。SDK 编译器 FxsChangelist 372475，2018-08-29；零售游戏先前日志 FxsChangelist 469133，两者并非同一构建，运行兼容性仍需用户验证。文件哈希见 `evidence/phase1-source-hashes.json`。
+源码根目录：`<WOTC-SDK 安装目录>\Development\SrcOrig`（Steam 上 XCOM 2: War of the Chosen Development Tools 的安装位置）。SDK 编译器 FxsChangelist 372475，2018-08-29；零售游戏先前日志 FxsChangelist 469133，两者并非同一构建，运行兼容性仍需用户验证。文件哈希见 `evidence/phase1-source-hashes.json`。
 
 ## 已核对的 Phase 1 接口
 

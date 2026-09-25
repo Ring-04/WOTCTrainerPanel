@@ -52,10 +52,14 @@ Get-Content -LiteralPath $log -Tail 18 | Write-Output
 $summary = @(Select-String -LiteralPath $log -Pattern '^Success - 0 error' | ForEach-Object Line)
 $modWarnings = @(Select-String -LiteralPath $log -Pattern 'WOTCTrainerPanel\\Classes.*: Warning,').Count
 $success = $compilerExit -eq 0 -and $summary.Count -gt 0 -and (Test-Path -LiteralPath $binary -PathType Leaf)
+# This evidence file is published with the repository, so it records repository-relative
+# locations and a placeholder for the SDK runtime instead of this machine's absolute paths.
 $result = [ordered]@{
-    Time = (Get-Date).ToString('o'); Compiler = $compiler; Arguments = $argsList
+    Time = (Get-Date).ToString('o')
+    Compiler = '<sdk-runtime>/Binaries/Win64/XComGame.com'
+    Arguments = @($argsList | ForEach-Object { $_.Replace($runtime, '<sdk-runtime>').Replace('\', '/') })
     ExitCode = $compilerExit; BinaryExists = (Test-Path -LiteralPath $binary -PathType Leaf)
-    BuildSucceeded = $success; Log = $log; InGameVerified = $false
+    BuildSucceeded = $success; Log = 'evidence/' + (Split-Path -Leaf $log); InGameVerified = $false
     CompilerSummary = $summary; ModWarningCount = $modWarnings; SourceFiles = $sourceFiles
 }
 if ($success) {

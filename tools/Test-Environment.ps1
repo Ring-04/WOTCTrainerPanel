@@ -10,6 +10,16 @@ $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $evidenceRoot = Join-Path $repoRoot 'evidence'
 
+# This report is published with the repository, so the account name is never written to it.
+function Protect-Path([string]$Path) {
+    if (-not $Path) { return $Path }
+    $profile = [Environment]::GetFolderPath('UserProfile')
+    if ($profile -and $Path.StartsWith($profile, [StringComparison]::OrdinalIgnoreCase)) {
+        return '%USERPROFILE%' + $Path.Substring($profile.Length)
+    }
+    return $Path
+}
+
 function Get-SdkStatus([string]$Candidate) {
     $sourceRoot = [IO.Path]::Combine($Candidate, 'Development\SrcOrig')
     if (-not (Test-Path -LiteralPath $sourceRoot -PathType Container)) {
@@ -28,11 +38,11 @@ function Get-SdkStatus([string]$Candidate) {
     $compiler = [IO.Path]::Combine($Candidate, 'Binaries\Win64\XComGame.com')
     $compilerPresent = Test-Path -LiteralPath $compiler -PathType Leaf
     [pscustomobject]@{
-        Root = $Candidate
+        Root = (Protect-Path $Candidate)
         Exists = (Test-Path -LiteralPath $Candidate -PathType Container)
-        SourceRoot = $sourceRoot
+        SourceRoot = (Protect-Path $sourceRoot)
         MissingSourceFiles = $missing
-        Compiler = $compiler
+        Compiler = (Protect-Path $compiler)
         CompilerFilePresent = $compilerPresent
         BasicFilesPresent = ($missing.Count -eq 0 -and $compilerPresent)
         Note = 'File presence only; version, API semantics, build templates and compiler execution still require verification.'
@@ -86,7 +96,7 @@ if ($GameRoot) {
 }
 $gameChecks = @($gameCandidates | ForEach-Object {
     [pscustomobject]@{
-        Root = $_
+        Root = (Protect-Path $_)
         GameExePresent = [IO.File]::Exists([IO.Path]::Combine($_, 'Binaries\Win64\XCom2.exe'))
     }
 })
@@ -119,14 +129,14 @@ if (-not $gameFound) { $blockers += 'WOTC game executable not found in checked c
 $report = [ordered]@{
     CheckedAt = (Get-Date).ToString('o')
     Scope = 'Read-only checks; writes only this report inside the mod repository. No recursive whole-disk scan.'
-    SteamLibraryFiles = $libraryFiles
-    SteamLibraries = $libraries
+    SteamLibraryFiles = @($libraryFiles | ForEach-Object { Protect-Path $_ })
+    SteamLibraries = @($libraries | ForEach-Object { Protect-Path $_ })
     Sdk = $sdkChecks
     Game = $gameChecks
     ExistingUserEnvironment = [ordered]@{
-        ConfigPath = $engineIni
+        ConfigPath = (Protect-Path $engineIni)
         ConfiguredLanguage = $configuredLanguage
-        LaunchLogPath = $launchLog
+        LaunchLogPath = (Protect-Path $launchLog)
         LaunchLogLastWriteTime = $logTimestamp
         PreviousCommandLine = $oldCommandLine
         GameRunning = (@(Get-Process -Name XCom2 -ErrorAction SilentlyContinue).Count -gt 0)
