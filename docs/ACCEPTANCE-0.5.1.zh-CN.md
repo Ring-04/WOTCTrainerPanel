@@ -1,9 +1,10 @@
-# WOTCTrainerPanel 0.5.0-test 实机验收清单
+# WOTCTrainerPanel 0.5.1-test 实机验收清单
 
-适用安装包：`WOTCTrainerPanel-0.5.0-test`（见 `docs/INSTALL-AND-TEST.zh-CN.md`）。
+适用安装包：`WOTCTrainerPanel-0.5.1-test`（见 `docs/INSTALL-AND-TEST.zh-CN.md`）。
 本清单按**风险从低到高**排列，A → G。**上一级未通过，不要进入下一级。**
 
-> 本版本全部功能都还没有在游戏里跑过。下表里的“预期结果”是设计意图，不是实测结论。
+> 0.5.0-test 首轮结果：战略层已测项目全部正常；战术层入口按钮没有出现，战术 / 任务 / 危险功能都没能进入。
+> 0.5.1-test 只修了战术入口。0.5.0 中已通过的项不必重测，但从战术层入口（A9）开始的各项全部还是**第一次实机**：下表里的“预期结果”是设计意图，不是实测结论。
 > 编译通过（0 error、Mod 自身 0 warning）只能说明源码能被 SDK 编译器接受，不能说明功能正常。
 
 ## 测试准备（先做，之后不再重复）
@@ -90,9 +91,10 @@
 - 可能污染存档：不可能（本项不发放任何物品）
 
 ### A9 战术层入口与面板读数
-- 步骤：进入一场战术战斗 → 找右上角「修改器」→ 打开
+- 步骤：进入一场战术战斗（读取完成、拿到士兵控制权）→ 找右上角「修改器」→ 打开
 - 预期：按钮出现一次；面板打开；12 个开关**全部显示「关闭」**且未被选中；「当前选择」显示选中士兵的姓名 / HP / 行动点数
-- 日志：`[WOTCTrainer] Tactical entry initialized`
+- 日志：按顺序应为 `[WOTCTrainer] Tactical listener loaded` → `Tactical HUD detected` → `Trainer button created, waiting for flash init` → `Trainer button spawned` → `Trainer button ready after N flash check(s)`；点击后出现 `Button clicked`
+- 若按钮未出现：附上 `Tactical HUD not detected` / `Trainer button flash not inited yet (check N)` / `Trainer button flash init FAILED` 这几行，它们指出卡在哪一步
 - 存读档验证：不需要
 - 可能污染存档：不可能
 
