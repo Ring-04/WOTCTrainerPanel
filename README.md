@@ -14,8 +14,9 @@ Version **0.9.0-beta**. The source compiles against the official War of the Chos
 **0 errors and 0 warnings from this mod** — the 8 warnings the compiler reports come from the SDK's
 own DLC content.
 
-**This build has not been played through yet.** Compiling is not the same as working. Everything
-below describes what the code is built to do; the in-game checks are still pending. Back up your
+**Core strategy and tactical flows were verified in game on the 0.5.2 test build.** The 0.9.0-beta
+release keeps the same Phase 1–5 gameplay code and adds localization / release cleanup. The final public
+package has been rebuilt and hash-checked, but it has not had a full regression pass. Back up your
 saves before you use it on a campaign you care about.
 
 ## Requirements
@@ -102,9 +103,9 @@ provably safe, so they were not shipped as switches:
 - **Back up your saves.** The panel writes into your campaign. The writes go through the game's own
   submission APIs and the original value is re-checked before a change is committed, but a trainer is
   still a trainer.
-- **Not verified in game yet.** Button placement, Chinese font rendering, layout at other
-  resolutions and UI scales, save/load behaviour, runtime API compatibility and compatibility with
-  other mods are all unproven.
+- **Beta status.** Basic strategy/tactical use was verified on the prior test build, but other
+  resolutions and UI scales, long-run save/load behaviour, and compatibility with other mods are not
+  fully covered.
 - **One copy only.** Do not enable two instances of this mod.
 - The mod never touches `XCom2.exe`, Steam files, game configuration, launch options or save
   binaries; uninstalling is unchecking the mod and deleting the folder.
